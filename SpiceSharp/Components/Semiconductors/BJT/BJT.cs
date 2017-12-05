@@ -9,7 +9,7 @@ namespace SpiceSharp.Components
     /// A bipolar junction transistor (BJT)
     /// </summary>
     [SpicePins("Collector", "Base", "Emitter", "Substrate")]
-    public class BJT : CircuitComponent
+    public class BJT : CircuitComponent<CircuitModel>
     {
         /// <summary>
         /// Register default BJT behaviors

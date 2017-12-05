@@ -52,6 +52,7 @@
     <Compile Include="Components\Currentsources\VoltageControlledCurrentsource\VoltageControlledCurrentsource.cs" />
     <Compile Include="Components\Currentsources\VoltageControlledCurrentsource\VoltageControlledCurrentsourceAcBehavior.cs" />
     <Compile Include="Components\Currentsources\VoltageControlledCurrentsource\VoltageControlledCurrentsourceLoadBehavior.cs" />
+    <Compile Include="Components\ICircuitComponent.cs" />
     <Compile Include="Components\RLC\Capacitor\CapacitorAcBehavior.cs" />
     <Compile Include="Components\RLC\Capacitor\CapacitorAcceptBehavior.cs" />
     <Compile Include="Components\RLC\Capacitor\CapacitorLoadBehavior.cs" />

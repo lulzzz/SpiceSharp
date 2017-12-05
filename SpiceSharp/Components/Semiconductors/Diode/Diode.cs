@@ -8,7 +8,7 @@ namespace SpiceSharp.Components
     /// A diode
     /// </summary>
     [SpicePins("D+", "D-")]
-    public class Diode : CircuitComponent
+    public class Diode : CircuitComponent<CircuitModel>
     {
         /// <summary>
         /// Register diode behaviors

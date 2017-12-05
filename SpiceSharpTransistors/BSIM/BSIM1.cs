@@ -5,7 +5,7 @@ using SpiceSharp.Parameters;
 namespace SpiceSharp.Components
 {
     [SpicePins("Drain", "Gate", "Source", "Bulk"), ConnectedPins(0, 2, 3)]
-    public class BSIM1 : CircuitComponent
+    public class BSIM1 : CircuitComponent<CircuitModel>
     {
         /// <summary>
         /// Register default behaviours
@@ -21,7 +21,7 @@ namespace SpiceSharp.Components
         /// <summary>
         /// Gets or sets the device model
         /// </summary>
-        public void SetModel(BSIM1Model model) => Model = (ICircuitObject)model;
+        public void SetModel(BSIM1Model model) => Model = model;
 
         /// <summary>
         /// Parameters

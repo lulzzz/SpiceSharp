@@ -9,7 +9,7 @@ namespace SpiceSharp.Components
     /// An inductor
     /// </summary>
     [SpicePins("L+", "L-")]
-    public class Inductor : CircuitComponent
+    public class Inductor : CircuitComponent<CircuitModel>
     {
         /// <summary>
         /// Register default behaviors

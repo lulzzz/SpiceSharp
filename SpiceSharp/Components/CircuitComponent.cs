@@ -8,7 +8,7 @@ namespace SpiceSharp.Components
     /// A class that represents a circuit component/device.
     /// It can be connected in a circuit and it also has parameters.
     /// </summary>
-    public abstract class CircuitComponent : ICircuitObject
+    public abstract class CircuitComponent<TModel> : ICircuitComponent where TModel: CircuitModel
     {
         /// <summary>
         /// Private variables
@@ -55,7 +55,9 @@ namespace SpiceSharp.Components
         /// <summary>
         /// Get the model of the circuit component (if any)
         /// </summary>
-        public ICircuitObject Model { get; protected set; } = null;
+        public TModel Model { get; protected set; } = null;
+
+        CircuitModel ICircuitComponent.Model => this.Model;
 
         /// <summary>
         /// Connect the component in the circuit
