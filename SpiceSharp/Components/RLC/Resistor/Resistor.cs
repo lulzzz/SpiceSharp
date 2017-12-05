@@ -11,14 +11,14 @@ namespace SpiceSharp.Components
     public class Resistor : CircuitComponent<CircuitModel>
     {
         /// <summary>
-        /// Register default behaviors of the resistor
+        /// Register default behaviors
         /// </summary>
-        static Resistor()
+        public override void RegisterBehaviors()
         {
-            Behaviors.Behaviors.RegisterBehavior(typeof(Resistor), typeof(ComponentBehaviors.ResistorLoadBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(Resistor), typeof(ComponentBehaviors.ResistorAcBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(Resistor), typeof(ComponentBehaviors.ResistorNoiseBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(Resistor), typeof(ComponentBehaviors.ResistorTemperatureBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.ResistorLoadBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.ResistorAcBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.ResistorNoiseBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.ResistorTemperatureBehavior));
         }
 
         /// <summary>

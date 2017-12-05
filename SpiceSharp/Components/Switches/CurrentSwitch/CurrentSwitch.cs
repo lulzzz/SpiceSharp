@@ -13,10 +13,10 @@ namespace SpiceSharp.Components
         /// <summary>
         /// Register default behaviors
         /// </summary>
-        static CurrentSwitch()
+        public override void RegisterBehaviors()
         {
-            Behaviors.Behaviors.RegisterBehavior(typeof(CurrentSwitch), typeof(ComponentBehaviors.CurrentSwitchLoadBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(CurrentSwitch), typeof(ComponentBehaviors.CurrentSwitchAcBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.CurrentSwitchLoadBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.CurrentSwitchAcBehavior));
         }
 
         /// <summary>

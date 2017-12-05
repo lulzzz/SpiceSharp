@@ -13,13 +13,13 @@ namespace SpiceSharp.Components
         /// <summary>
         /// Register default behaviors
         /// </summary>
-        static Capacitor()
+        public override void RegisterBehaviors()
         {
-            Behaviors.Behaviors.RegisterBehavior(typeof(Capacitor), typeof(ComponentBehaviors.CapacitorLoadBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(Capacitor), typeof(ComponentBehaviors.CapacitorAcBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(Capacitor), typeof(ComponentBehaviors.CapacitorTemperatureBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(Capacitor), typeof(ComponentBehaviors.CapacitorAcceptBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(Capacitor), typeof(ComponentBehaviors.CapacitorTruncateBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.CapacitorLoadBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.CapacitorAcBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.CapacitorTemperatureBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.CapacitorAcceptBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.CapacitorTruncateBehavior));
         }
 
         /// <summary>

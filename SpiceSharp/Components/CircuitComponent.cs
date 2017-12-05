@@ -135,7 +135,10 @@ namespace SpiceSharp.Components
         /// Setup the component
         /// </summary>
         /// <param name="ckt">The circuit</param>
-        public abstract void Setup(Circuit ckt);
+        public virtual void Setup(Circuit ckt)
+        {
+            
+        }
 
         /// <summary>
         /// Unsetup/destroy the component
@@ -144,6 +147,15 @@ namespace SpiceSharp.Components
         public virtual void Unsetup(Circuit ckt)
         {
             // Do nothing
+        }
+
+        protected void RegisterBehavior(Type behaviourType)
+        {
+            Behaviors.Behaviors.RegisterBehavior(this.GetType(), behaviourType);
+        }
+
+        public virtual void RegisterBehaviors()
+        {
         }
     }
 }

@@ -15,13 +15,13 @@ namespace SpiceSharp.Components
         /// <summary>
         /// Register default behaviors
         /// </summary>
-        static BSIM4v80()
+        public override void RegisterBehaviors()
         {
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM4v80), typeof(ComponentBehaviors.BSIM4v80TemperatureBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM4v80), typeof(ComponentBehaviors.BSIM4v80LoadBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM4v80), typeof(ComponentBehaviors.BSIM4v80AcBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM4v80), typeof(ComponentBehaviors.BSIM4v80NoiseBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM4v80), typeof(ComponentBehaviors.BSIM4v80TruncateBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.BSIM4v80TemperatureBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.BSIM4v80LoadBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.BSIM4v80AcBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.BSIM4v80NoiseBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.BSIM4v80TruncateBehavior));
         }
 
         /// <summary>

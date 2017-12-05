@@ -26,9 +26,14 @@ namespace SpiceSharp.Behaviors
             // Add an entry to the Defaults
             var key = new Tuple<Type, Type>(componentType, behaviourType.BaseType);
             if (!Defaults.ContainsKey(key))
+            {
                 Defaults[key] = new List<Type>();
+            }
 
-            Defaults[key].Add(behaviourType);
+            if (!Defaults[key].Contains(behaviourType))
+            {
+                Defaults[key].Add(behaviourType);
+            }
         }
 
         /// <summary>

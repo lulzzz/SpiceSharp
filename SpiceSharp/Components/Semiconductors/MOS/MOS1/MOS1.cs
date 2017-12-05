@@ -15,13 +15,13 @@ namespace SpiceSharp.Components
         /// <summary>
         /// Register default behaviors
         /// </summary>
-        static MOS1()
+        public override void RegisterBehaviors()
         {
-            Behaviors.Behaviors.RegisterBehavior(typeof(MOS1), typeof(ComponentBehaviors.MOS1TemperatureBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(MOS1), typeof(ComponentBehaviors.MOS1LoadBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(MOS1), typeof(ComponentBehaviors.MOS1AcBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(MOS1), typeof(ComponentBehaviors.MOS1NoiseBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(MOS1), typeof(ComponentBehaviors.MOS1TruncateBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.MOS1TemperatureBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.MOS1LoadBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.MOS1AcBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.MOS1NoiseBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.MOS1TruncateBehavior));
         }
 
         /// <summary>

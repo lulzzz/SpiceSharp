@@ -46,5 +46,10 @@ namespace SpiceSharp.Components
         {
             // Do nothing
         }
+
+        public virtual void RegisterBehaviors()
+        {
+            
+        }
     }
 }

@@ -14,12 +14,12 @@ namespace SpiceSharp.Components
         /// <summary>
         /// Register default behaviors
         /// </summary>
-        static Inductor()
+        public override void RegisterBehaviors()
         {
-            Behaviors.Behaviors.RegisterBehavior(typeof(Inductor), typeof(ComponentBehaviors.InductorLoadBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(Inductor), typeof(ComponentBehaviors.InductorAcBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(Inductor), typeof(ComponentBehaviors.InductorAcceptBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(Inductor), typeof(ComponentBehaviors.InductorTruncateBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.InductorLoadBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.InductorAcBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.InductorAcceptBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.InductorTruncateBehavior));
         }
 
         /// <summary>

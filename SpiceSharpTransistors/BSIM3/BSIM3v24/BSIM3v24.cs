@@ -12,15 +12,15 @@ namespace SpiceSharp.Components
     public class BSIM3v24 : CircuitComponent<CircuitModel>
     {
         /// <summary>
-        /// Register default behaviours
+        /// Register default behaviors
         /// </summary>
-        static BSIM3v24()
+        public override void RegisterBehaviors()
         {
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM3v24), typeof(ComponentBehaviors.BSIM3v24TemperatureBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM3v24), typeof(ComponentBehaviors.BSIM3v24LoadBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM3v24), typeof(ComponentBehaviors.BSIM3v24AcBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM3v24), typeof(ComponentBehaviors.BSIM3v24NoiseBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM3v24), typeof(ComponentBehaviors.BSIM3v24TruncateBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.BSIM3v24TemperatureBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.BSIM3v24LoadBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.BSIM3v24AcBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.BSIM3v24NoiseBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.BSIM3v24TruncateBehavior));
         }
 
         /// <summary>

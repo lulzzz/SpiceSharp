@@ -8,10 +8,7 @@ namespace SpiceSharp.Components
     /// </summary>
     public class BSIM1Model : CircuitModel
     {
-        /// <summary>
-        /// Register default behaviours
-        /// </summary>
-        static BSIM1Model()
+        public override void RegisterBehaviors()
         {
             Behaviors.Behaviors.RegisterBehavior(typeof(BSIM1Model), typeof(ComponentBehaviors.BSIM1ModelTemperatureBehavior));
         }

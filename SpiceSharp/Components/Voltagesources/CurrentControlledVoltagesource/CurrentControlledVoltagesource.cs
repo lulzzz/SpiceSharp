@@ -14,10 +14,10 @@ namespace SpiceSharp.Components
         /// <summary>
         /// Register default behaviors
         /// </summary>
-        static CurrentControlledVoltagesource()
+        public override void RegisterBehaviors()
         {
-            Behaviors.Behaviors.RegisterBehavior(typeof(CurrentControlledVoltagesource), typeof(ComponentBehaviors.CurrentControlledVoltagesourceLoadBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(CurrentControlledVoltagesource), typeof(ComponentBehaviors.CurrentControlledVoltagesourceAcBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.CurrentControlledVoltagesourceLoadBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.CurrentControlledVoltagesourceAcBehavior));
         }
 
         /// <summary>

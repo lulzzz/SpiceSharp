@@ -12,15 +12,15 @@ namespace SpiceSharp.Components
     public class BJT : CircuitComponent<CircuitModel>
     {
         /// <summary>
-        /// Register default BJT behaviors
+        /// Register default behaviors
         /// </summary>
-        static BJT()
+        public override void RegisterBehaviors()
         {
-            Behaviors.Behaviors.RegisterBehavior(typeof(BJT), typeof(ComponentBehaviors.BJTTemperatureBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(BJT), typeof(ComponentBehaviors.BJTLoadBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(BJT), typeof(ComponentBehaviors.BJTAcBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(BJT), typeof(ComponentBehaviors.BJTNoiseBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(BJT), typeof(ComponentBehaviors.BJTTruncateBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.BJTTemperatureBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.BJTLoadBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.BJTAcBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.BJTNoiseBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.BJTTruncateBehavior));
         }
 
         /// <summary>

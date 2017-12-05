@@ -13,13 +13,13 @@ namespace SpiceSharp.Components
     public class Voltagesource : CircuitComponent<CircuitModel>
     {
         /// <summary>
-        /// Register default voltagesource behaviors
+        /// Register default behaviors
         /// </summary>
-        static Voltagesource()
+        public override void RegisterBehaviors()
         {
-            Behaviors.Behaviors.RegisterBehavior(typeof(Voltagesource), typeof(ComponentBehaviors.VoltagesourceLoadBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(Voltagesource), typeof(ComponentBehaviors.VoltageSourceLoadAcBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(Voltagesource), typeof(ComponentBehaviors.VoltagesourceAcceptBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.VoltagesourceLoadBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.VoltageSourceLoadAcBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.VoltagesourceAcceptBehavior));
         }
 
         /// <summary>

@@ -8,10 +8,7 @@ namespace SpiceSharp.Components
     /// </summary>
     public class DiodeModel : CircuitModel
     {
-        /// <summary>
-        /// Register default behaviors
-        /// </summary>
-        static DiodeModel()
+        public override void RegisterBehaviors()
         {
             Behaviors.Behaviors.RegisterBehavior(typeof(DiodeModel), typeof(ComponentBehaviors.DiodeModelTemperatureBehavior));
         }

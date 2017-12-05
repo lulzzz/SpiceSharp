@@ -13,10 +13,10 @@ namespace SpiceSharp.Components
         /// <summary>
         /// Register default behaviors
         /// </summary>
-        static MutualInductance()
+        public override void RegisterBehaviors()
         {
-            Behaviors.Behaviors.RegisterBehavior(typeof(MutualInductance), typeof(ComponentBehaviors.MutualInductanceLoadBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(MutualInductance), typeof(ComponentBehaviors.MutualInductanceAcBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.MutualInductanceLoadBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.MutualInductanceAcBehavior));
         }
 
         /// <summary>

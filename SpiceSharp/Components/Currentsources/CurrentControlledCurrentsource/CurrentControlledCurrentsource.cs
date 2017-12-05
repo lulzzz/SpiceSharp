@@ -14,10 +14,10 @@ namespace SpiceSharp.Components
         /// <summary>
         /// Register default behaviors
         /// </summary>
-        static CurrentControlledCurrentsource()
+        public override void RegisterBehaviors()
         {
-            Behaviors.Behaviors.RegisterBehavior(typeof(CurrentControlledCurrentsource), typeof(ComponentBehaviors.CurrentControlledCurrentsourceLoadBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(CurrentControlledCurrentsource), typeof(ComponentBehaviors.CurrentControlledCurrentsourceAcBehavior));
+           RegisterBehavior(typeof(ComponentBehaviors.CurrentControlledCurrentsourceLoadBehavior));
+           RegisterBehavior(typeof(ComponentBehaviors.CurrentControlledCurrentsourceAcBehavior));
         }
 
         /// <summary>

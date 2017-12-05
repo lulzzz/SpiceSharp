@@ -28,5 +28,7 @@ namespace SpiceSharp.Circuits
         /// </summary>
         /// <param name="ckt">The circuit</param>
         void Unsetup(Circuit ckt);
+
+        void RegisterBehaviors();
     }
 }

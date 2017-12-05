@@ -13,15 +13,15 @@ namespace SpiceSharp.Components
     public class MOS3 : CircuitComponent<CircuitModel>
     {
         /// <summary>
-        /// Register default behaviour
+        /// Register default behaviors
         /// </summary>
-        static MOS3()
+        public override void RegisterBehaviors()
         {
-            Behaviors.Behaviors.RegisterBehavior(typeof(MOS3), typeof(ComponentBehaviors.MOS3TemperatureBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(MOS3), typeof(ComponentBehaviors.MOS3LoadBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(MOS3), typeof(ComponentBehaviors.MOS3AcBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(MOS3), typeof(ComponentBehaviors.MOS3NoiseBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(MOS3), typeof(ComponentBehaviors.MOS3TruncateBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.MOS3TemperatureBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.MOS3LoadBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.MOS3AcBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.MOS3NoiseBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.MOS3TruncateBehavior));
         }
 
         /// <summary>

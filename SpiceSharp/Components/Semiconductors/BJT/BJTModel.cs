@@ -8,10 +8,7 @@ namespace SpiceSharp.Components
     /// </summary>
     public class BJTModel : CircuitModel
     {
-        /// <summary>
-        /// Register default behaviors
-        /// </summary>
-        static BJTModel()
+        public override void RegisterBehaviors()
         {
             Behaviors.Behaviors.RegisterBehavior(typeof(BJTModel), typeof(ComponentBehaviors.BJTModelTemperatureBehavior));
         }

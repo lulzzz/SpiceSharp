@@ -4,6 +4,7 @@ using SpiceSharp.IntegrationMethods;
 using SpiceSharp.Simulations;
 using SpiceSharp.Diagnostics;
 using SpiceSharp.Behaviors;
+using SpiceSharp.Components;
 
 namespace SpiceSharp
 {
@@ -81,7 +82,18 @@ namespace SpiceSharp
 
             // Setup all devices
             foreach (var c in Objects)
+            {
                 c.Setup(this);
+                if (c is ICircuitComponent com)
+                {
+                    com.RegisterBehaviors();
+                }
+
+                if (c is CircuitModel mod)
+                {
+                    mod.RegisterBehaviors();
+                }
+            }
 
             // Initialize the state
             State.Initialize(this);

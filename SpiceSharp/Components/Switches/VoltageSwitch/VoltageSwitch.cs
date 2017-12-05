@@ -13,10 +13,10 @@ namespace SpiceSharp.Components
         /// <summary>
         /// Register default behaviors
         /// </summary>
-        static VoltageSwitch()
+        public override void RegisterBehaviors()
         {
-            Behaviors.Behaviors.RegisterBehavior(typeof(VoltageSwitch), typeof(ComponentBehaviors.VoltageSwitchLoadBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(VoltageSwitch), typeof(ComponentBehaviors.VoltageSwitchAcBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.VoltageSwitchLoadBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.VoltageSwitchAcBehavior));
         }
 
         /// <summary>

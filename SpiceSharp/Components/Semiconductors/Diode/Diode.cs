@@ -11,15 +11,15 @@ namespace SpiceSharp.Components
     public class Diode : CircuitComponent<CircuitModel>
     {
         /// <summary>
-        /// Register diode behaviors
+        /// Register default behaviors
         /// </summary>
-        static Diode()
+        public override void RegisterBehaviors()
         {
-            Behaviors.Behaviors.RegisterBehavior(typeof(Diode), typeof(ComponentBehaviors.DiodeTemperatureBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(Diode), typeof(ComponentBehaviors.DiodeLoadBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(Diode), typeof(ComponentBehaviors.DiodeAcBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(Diode), typeof(ComponentBehaviors.DiodeNoiseBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(Diode), typeof(ComponentBehaviors.DiodeTruncateBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.DiodeTemperatureBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.DiodeLoadBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.DiodeAcBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.DiodeNoiseBehavior));
+            RegisterBehavior(typeof(ComponentBehaviors.DiodeTruncateBehavior));
         }
 
         /// <summary>

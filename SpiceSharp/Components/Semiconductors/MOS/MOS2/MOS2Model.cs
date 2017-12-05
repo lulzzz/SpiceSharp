@@ -8,10 +8,7 @@ namespace SpiceSharp.Components
     /// </summary>
     public class MOS2Model : CircuitModel
     {
-        /// <summary>
-        /// Register default behaviors
-        /// </summary>
-        static MOS2Model()
+        public override void RegisterBehaviors()
         {
             Behaviors.Behaviors.RegisterBehavior(typeof(MOS2Model), typeof(ComponentBehaviors.MOS2ModelTemperatureBehavior));
         }
