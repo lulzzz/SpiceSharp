@@ -22,12 +22,6 @@ namespace SpiceSharp.Components
         }
 
         /// <summary>
-        /// Set the model for the resistor
-        /// </summary>
-        /// <param name="model"></param>
-        public void SetModel(ResistorModel model) => Model = model;
-
-        /// <summary>
         /// Parameters
         /// </summary>
         [SpiceName("temp"), SpiceInfo("Instance operating temperature", Interesting = false)]

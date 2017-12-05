@@ -53,9 +53,9 @@ namespace SpiceSharp.Components
         }
 
         /// <summary>
-        /// Get the model of the circuit component (if any)
+        /// Get and sets the model of the circuit component
         /// </summary>
-        public TModel Model { get; protected set; } = null;
+        public TModel Model { get; set; } = null;
 
         CircuitModel ICircuitComponent.Model => this.Model;
 

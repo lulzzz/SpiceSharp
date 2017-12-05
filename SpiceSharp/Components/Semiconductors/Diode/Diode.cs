@@ -23,11 +23,6 @@ namespace SpiceSharp.Components
         }
 
         /// <summary>
-        /// Set the model for the diode
-        /// </summary>
-        public void SetModel(DiodeModel model) => Model = model;
-
-        /// <summary>
         /// Parameters
         /// </summary>
         [SpiceName("area"), SpiceInfo("Area factor")]

@@ -31,7 +31,7 @@ namespace SpiceSharp.Parser.Readers
             Mosfets.Add(typeof(MOS1Model), (CircuitIdentifier name, ICircuitObject model) =>
             {
                 var m = new MOS1(name);
-                m.SetModel((MOS1Model)model);
+                m.Model = (MOS1Model)model;
                 return m;
             });
 
@@ -39,7 +39,7 @@ namespace SpiceSharp.Parser.Readers
             Mosfets.Add(typeof(MOS2Model), (CircuitIdentifier name, ICircuitObject model) =>
             {
                 var m = new MOS2(name);
-                m.SetModel((MOS2Model)model);
+                m.Model = (MOS2Model)model;
                 return m;
             });
 
@@ -47,7 +47,7 @@ namespace SpiceSharp.Parser.Readers
             Mosfets.Add(typeof(MOS3Model), (CircuitIdentifier name, ICircuitObject model) =>
             {
                 var m = new MOS3(name);
-                m.SetModel((MOS3Model)model);
+                m.Model = (MOS3Model)model;
                 return m;
             });
         }

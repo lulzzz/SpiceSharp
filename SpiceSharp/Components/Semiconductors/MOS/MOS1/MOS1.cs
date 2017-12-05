@@ -25,11 +25,6 @@ namespace SpiceSharp.Components
         }
 
         /// <summary>
-        /// Set the model for the MOS1 Mosfet
-        /// </summary>
-        public void SetModel(MOS1Model model) => Model = model;
-
-        /// <summary>
         /// Parameters
         /// </summary>
         [SpiceName("temp"), SpiceInfo("Instance temperature")]

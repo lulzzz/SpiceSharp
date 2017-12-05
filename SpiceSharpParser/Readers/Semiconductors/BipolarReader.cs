@@ -35,7 +35,7 @@ namespace SpiceSharp.Parser.Readers
 
             if (parameters.Count < 5)
                 throw new ParseException(parameters[3], "Model expected", false);
-            bjt.SetModel(netlist.FindModel<BJTModel>(parameters[4]));
+            bjt.Model = netlist.FindModel<BJTModel>(parameters[4]);
 
             for (int i = 5; i < parameters.Count; i++)
             {

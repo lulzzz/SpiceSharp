@@ -20,11 +20,6 @@ namespace SpiceSharp.Components
         }
 
         /// <summary>
-        /// Set the model for the current-controlled switch
-        /// </summary>
-        public void SetModel(CurrentSwitchModel model) => Model = model;
-
-        /// <summary>
         /// Parameters
         /// </summary>
         [SpiceName("on"), SpiceInfo("Initially closed")]

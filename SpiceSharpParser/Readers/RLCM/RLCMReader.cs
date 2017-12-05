@@ -70,12 +70,12 @@ namespace SpiceSharp.Parser.Readers
                 cap.CAPcapac.Set(netlist.ParseDouble(parameters[2]));
             else
             {
-                cap.SetModel(netlist.FindModel<CapacitorModel>(parameters[2]));
+                cap.Model = netlist.FindModel<CapacitorModel>(parameters[2]);
                 switch (parameters[2].kind)
                 {
                     case WORD:
                     case IDENTIFIER:
-                        cap.SetModel(netlist.Path.FindModel<CapacitorModel>(netlist.Circuit.Objects, new CircuitIdentifier(parameters[2].image)));
+                        cap.Model = netlist.Path.FindModel<CapacitorModel>(netlist.Circuit.Objects, new CircuitIdentifier(parameters[2].image));
                         break;
                     default:
                         throw new ParseException(parameters[2], "Model name expected");
@@ -157,7 +157,7 @@ namespace SpiceSharp.Parser.Readers
             else
             {
                 // Read the model
-                res.SetModel(netlist.FindModel<ResistorModel>(parameters[2]));
+                res.Model = netlist.FindModel<ResistorModel>(parameters[2]);
                 netlist.ReadParameters(res, parameters, 3);
                 if (!res.RESlength.Given)
                     throw new ParseException(parameters[parameters.Count - 1], "L needs to be specified", false);

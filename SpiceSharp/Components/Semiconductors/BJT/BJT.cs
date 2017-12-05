@@ -24,11 +24,6 @@ namespace SpiceSharp.Components
         }
 
         /// <summary>
-        /// Set the model for the BJT
-        /// </summary>
-        public void SetModel(BJTModel model) => Model = model;
-
-        /// <summary>
         /// Parameters
         /// </summary>
         [SpiceName("area"), SpiceInfo("Area factor")]

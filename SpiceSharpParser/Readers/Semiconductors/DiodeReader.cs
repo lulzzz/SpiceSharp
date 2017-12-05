@@ -28,7 +28,7 @@ namespace SpiceSharp.Parser.Readers
 
             if (parameters.Count < 3)
                 throw new ParseException(parameters[1], "Model expected", false);
-            dio.SetModel(netlist.FindModel<DiodeModel>(parameters[2]));
+            dio.Model = netlist.FindModel<DiodeModel>(parameters[2]);
 
             // Read the rest of the parameters
             for (int i = 3; i < parameters.Count; i++)

@@ -23,12 +23,6 @@ namespace SpiceSharp.Components
         }
 
         /// <summary>
-        /// Set the model for the capacitor
-        /// </summary>
-        /// <param name="model"></param>
-        public void SetModel(CapacitorModel model) => Model = model;
-
-        /// <summary>
         /// Capacitance
         /// </summary>
         [SpiceName("capacitance"), SpiceInfo("Device capacitance", IsPrincipal = true)]

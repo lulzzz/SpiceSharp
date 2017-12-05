@@ -25,11 +25,6 @@ namespace SpiceSharp.Components
         }
 
         /// <summary>
-        /// Set the model for the MOS3 model
-        /// </summary>
-        public void SetModel(MOS3Model model) => Model = model;
-
-        /// <summary>
         /// Parameters
         /// </summary>
         [SpiceName("w"), SpiceInfo("Width")]

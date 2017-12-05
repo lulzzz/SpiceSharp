@@ -47,7 +47,7 @@ namespace SpiceSharp.Parser.Readers
             // Read the model
             if (parameters.Count < 5)
                 throw new ParseException(parameters[3], "Model expected", false);
-            vsw.SetModel(netlist.FindModel<VoltageSwitchModel>(parameters[4]));
+            vsw.Model = netlist.FindModel<VoltageSwitchModel>(parameters[4]);
 
             // Optional ON or OFF
             if (parameters.Count == 6)
@@ -95,7 +95,7 @@ namespace SpiceSharp.Parser.Readers
             }
 
             // Get the model
-            csw.SetModel(netlist.FindModel<CurrentSwitchModel>(parameters[3]));
+            csw.Model = netlist.FindModel<CurrentSwitchModel>(parameters[3]);
 
             // Optional on or off
             if (parameters.Count > 4)
