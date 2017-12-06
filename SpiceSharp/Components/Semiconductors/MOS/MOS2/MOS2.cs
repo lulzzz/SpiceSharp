@@ -3,6 +3,7 @@ using SpiceSharp.Circuits;
 using SpiceSharp.Diagnostics;
 using SpiceSharp.Parameters;
 using SpiceSharp.Sparse;
+using SpiceSharp.Behaviors;
 
 namespace SpiceSharp.Components
 {
@@ -18,11 +19,11 @@ namespace SpiceSharp.Components
         /// </summary>
         public override void RegisterBehaviors()
         {
-            RegisterBehavior(typeof(ComponentBehaviors.MOS2TemperatureBehavior));
-            RegisterBehavior(typeof(ComponentBehaviors.MOS2LoadBehavior));
-            RegisterBehavior(typeof(ComponentBehaviors.MOS2AcBehavior));
-            RegisterBehavior(typeof(ComponentBehaviors.MOS2NoiseBehavior));
-            RegisterBehavior(typeof(ComponentBehaviors.MOS2TruncateBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.MOS2TemperatureBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.MOS2LoadBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.MOS2AcBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.MOS2NoiseBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.MOS2TruncateBehavior));
         }
 
         /// <summary>

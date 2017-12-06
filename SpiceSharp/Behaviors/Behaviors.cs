@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using SpiceSharp.Circuits;
-using SpiceSharp.Components;
 
 namespace SpiceSharp.Behaviors
 {
@@ -14,7 +12,7 @@ namespace SpiceSharp.Behaviors
         /// <summary>
         /// Behaviors per component type
         /// </summary>
-        public static readonly Dictionary<Tuple<Type, Type>, List<Type>> Defaults = new Dictionary<Tuple<Type, Type>, List<Type>>();
+        public static readonly Dictionary<Tuple<Type, Type>, List<Type>> Registry = new Dictionary<Tuple<Type, Type>, List<Type>>();
 
         /// <summary>
         /// Register a default behaviour
@@ -25,14 +23,14 @@ namespace SpiceSharp.Behaviors
         {
             // Add an entry to the Defaults
             var key = new Tuple<Type, Type>(componentType, behaviourType.BaseType);
-            if (!Defaults.ContainsKey(key))
+            if (!Registry.ContainsKey(key))
             {
-                Defaults[key] = new List<Type>();
+                Registry[key] = new List<Type>();
             }
 
-            if (!Defaults[key].Contains(behaviourType))
+            if (!Registry[key].Contains(behaviourType))
             {
-                Defaults[key].Add(behaviourType);
+                Registry[key].Add(behaviourType);
             }
         }
 
@@ -80,7 +78,7 @@ namespace SpiceSharp.Behaviors
             var key = new Tuple<Type, Type>(obj.GetType(), typeof(T));
 
             // Find the behaviour
-            if (Defaults.TryGetValue(key, out List<Type> behaviors))
+            if (Registry.TryGetValue(key, out List<Type> behaviors))
                 result.AddRange(behaviors);
             return result;
         }

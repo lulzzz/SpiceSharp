@@ -147,11 +147,6 @@ namespace SpiceSharp.Components
             // Do nothing
         }
 
-        protected void RegisterBehavior(Type behaviourType)
-        {
-            Behaviors.Behaviors.RegisterBehavior(this.GetType(), behaviourType);
-        }
-
         public virtual void RegisterBehaviors()
         {
         }

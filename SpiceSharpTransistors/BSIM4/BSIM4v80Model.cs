@@ -4,6 +4,7 @@ using SpiceSharp.Circuits;
 using SpiceSharp.Diagnostics;
 using SpiceSharp.Parameters;
 using SpiceSharp.Components.Transistors;
+using SpiceSharp.Behaviors;
 
 namespace SpiceSharp.Components
 {
@@ -14,7 +15,7 @@ namespace SpiceSharp.Components
     {
         public override void RegisterBehaviors()
         {
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM4v80Model), typeof(ComponentBehaviors.BSIM4v80ModelTemperatureBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.BSIM4v80ModelTemperatureBehavior));
         }
 
         /// <summary>

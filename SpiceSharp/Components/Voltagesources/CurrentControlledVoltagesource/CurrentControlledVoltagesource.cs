@@ -2,6 +2,7 @@
 using SpiceSharp.Parameters;
 using SpiceSharp.Diagnostics;
 using SpiceSharp.Sparse;
+using SpiceSharp.Behaviors;
 
 namespace SpiceSharp.Components
 {
@@ -16,8 +17,8 @@ namespace SpiceSharp.Components
         /// </summary>
         public override void RegisterBehaviors()
         {
-            RegisterBehavior(typeof(ComponentBehaviors.CurrentControlledVoltagesourceLoadBehavior));
-            RegisterBehavior(typeof(ComponentBehaviors.CurrentControlledVoltagesourceAcBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.CurrentControlledVoltagesourceLoadBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.CurrentControlledVoltagesourceAcBehavior));
         }
 
         /// <summary>

@@ -4,6 +4,7 @@ using SpiceSharp.Circuits;
 using SpiceSharp.Diagnostics;
 using SpiceSharp.Parameters;
 using SpiceSharp.Components.Transistors;
+using SpiceSharp.Behaviors;
 
 namespace SpiceSharp.Components
 {
@@ -18,10 +19,10 @@ namespace SpiceSharp.Components
         /// </summary>
         public override void RegisterBehaviors()
         {
-            RegisterBehavior(typeof(ComponentBehaviors.BSIM2TemperatureBehavior));
-            RegisterBehavior(typeof(ComponentBehaviors.BSIM2LoadBehavior));
-            RegisterBehavior(typeof(ComponentBehaviors.BSIM2AcBehavior));
-            RegisterBehavior(typeof(ComponentBehaviors.BSIM2TruncateBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.BSIM2TemperatureBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.BSIM2LoadBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.BSIM2AcBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.BSIM2TruncateBehavior));
         }
 
         /// <summary>

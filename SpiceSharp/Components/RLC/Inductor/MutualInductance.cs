@@ -2,6 +2,7 @@
 using SpiceSharp.Diagnostics;
 using SpiceSharp.Parameters;
 using SpiceSharp.Sparse;
+using SpiceSharp.Behaviors;
 
 namespace SpiceSharp.Components
 {
@@ -15,8 +16,8 @@ namespace SpiceSharp.Components
         /// </summary>
         public override void RegisterBehaviors()
         {
-            RegisterBehavior(typeof(ComponentBehaviors.MutualInductanceLoadBehavior));
-            RegisterBehavior(typeof(ComponentBehaviors.MutualInductanceAcBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.MutualInductanceLoadBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.MutualInductanceAcBehavior));
         }
 
         /// <summary>

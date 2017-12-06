@@ -2,6 +2,7 @@
 using SpiceSharp.Circuits;
 using SpiceSharp.Parameters;
 using SpiceSharp.Sparse;
+using SpiceSharp.Behaviors;
 
 namespace SpiceSharp.Components
 {
@@ -16,10 +17,10 @@ namespace SpiceSharp.Components
         /// </summary>
         public override void RegisterBehaviors()
         {
-            RegisterBehavior(typeof(ComponentBehaviors.InductorLoadBehavior));
-            RegisterBehavior(typeof(ComponentBehaviors.InductorAcBehavior));
-            RegisterBehavior(typeof(ComponentBehaviors.InductorAcceptBehavior));
-            RegisterBehavior(typeof(ComponentBehaviors.InductorTruncateBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.InductorLoadBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.InductorAcBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.InductorAcceptBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.InductorTruncateBehavior));
         }
 
         /// <summary>

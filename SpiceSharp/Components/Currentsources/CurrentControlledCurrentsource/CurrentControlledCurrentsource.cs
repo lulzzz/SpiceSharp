@@ -2,6 +2,7 @@
 using SpiceSharp.Parameters;
 using SpiceSharp.Diagnostics;
 using SpiceSharp.Sparse;
+using SpiceSharp.Behaviors;
 
 namespace SpiceSharp.Components
 {
@@ -16,8 +17,8 @@ namespace SpiceSharp.Components
         /// </summary>
         public override void RegisterBehaviors()
         {
-           RegisterBehavior(typeof(ComponentBehaviors.CurrentControlledCurrentsourceLoadBehavior));
-           RegisterBehavior(typeof(ComponentBehaviors.CurrentControlledCurrentsourceAcBehavior));
+           this.RegisterBehavior(typeof(ComponentBehaviors.CurrentControlledCurrentsourceLoadBehavior));
+           this.RegisterBehavior(typeof(ComponentBehaviors.CurrentControlledCurrentsourceAcBehavior));
         }
 
         /// <summary>

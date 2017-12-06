@@ -2,6 +2,7 @@
 using SpiceSharp.Diagnostics;
 using SpiceSharp.Parameters;
 using SpiceSharp.Components.Transistors;
+using SpiceSharp.Behaviors;
 
 namespace SpiceSharp.Components
 {
@@ -16,11 +17,11 @@ namespace SpiceSharp.Components
         /// </summary>
         public override void RegisterBehaviors()
         {
-            RegisterBehavior(typeof(ComponentBehaviors.BSIM3v24TemperatureBehavior));
-            RegisterBehavior(typeof(ComponentBehaviors.BSIM3v24LoadBehavior));
-            RegisterBehavior(typeof(ComponentBehaviors.BSIM3v24AcBehavior));
-            RegisterBehavior(typeof(ComponentBehaviors.BSIM3v24NoiseBehavior));
-            RegisterBehavior(typeof(ComponentBehaviors.BSIM3v24TruncateBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.BSIM3v24TemperatureBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.BSIM3v24LoadBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.BSIM3v24AcBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.BSIM3v24NoiseBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.BSIM3v24TruncateBehavior));
         }
 
         /// <summary>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using SpiceSharp.Circuits;
 using SpiceSharp.Parameters;
 using SpiceSharp.Components.Transistors;
+using SpiceSharp.Behaviors;
 
 namespace SpiceSharp.Components
 {
@@ -13,7 +14,7 @@ namespace SpiceSharp.Components
     {
         public override void RegisterBehaviors()
         {
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM3v24Model), typeof(ComponentBehaviors.BSIM3v24ModelTemperatureBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.BSIM3v24ModelTemperatureBehavior));
         }
 
         /// <summary>

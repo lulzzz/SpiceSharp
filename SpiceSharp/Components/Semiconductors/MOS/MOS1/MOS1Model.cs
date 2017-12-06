@@ -1,5 +1,6 @@
 ﻿using SpiceSharp.Circuits;
 using SpiceSharp.Parameters;
+using SpiceSharp.Behaviors;
 
 namespace SpiceSharp.Components
 {
@@ -10,7 +11,7 @@ namespace SpiceSharp.Components
     {
         public override void RegisterBehaviors()
         {
-            Behaviors.Behaviors.RegisterBehavior(typeof(MOS1Model), typeof(ComponentBehaviors.MOS1ModelTemperatureBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.MOS1ModelTemperatureBehavior));
         }
 
         /// <summary>

@@ -45,6 +45,7 @@
     <Compile Include="Attributes\IndependentSource.cs" />
     <Compile Include="Attributes\SpiceParameter.cs" />
     <Compile Include="Attributes\VoltageDriver.cs" />
+    <Compile Include="Behaviors\BehaviorsExtensions.cs" />
     <Compile Include="Components\Currentsources\CurrentControlledCurrentsource\CurrentControlledCurrentsource.cs" />
     <Compile Include="Components\Currentsources\CurrentControlledCurrentsource\CurrentControlledCurrentsourceAcBehavior.cs" />
     <Compile Include="Components\Currentsources\CurrentControlledCurrentsource\CurrentControlledCurrentsourceLoadBehavior.cs" />

@@ -1,6 +1,7 @@
 ﻿using SpiceSharp.Circuits;
 using SpiceSharp.Parameters;
 using SpiceSharp.Sparse;
+using SpiceSharp.Behaviors;
 
 namespace SpiceSharp.Components
 {
@@ -15,11 +16,11 @@ namespace SpiceSharp.Components
         /// </summary>
         public override void RegisterBehaviors()
         {
-            RegisterBehavior(typeof(ComponentBehaviors.DiodeTemperatureBehavior));
-            RegisterBehavior(typeof(ComponentBehaviors.DiodeLoadBehavior));
-            RegisterBehavior(typeof(ComponentBehaviors.DiodeAcBehavior));
-            RegisterBehavior(typeof(ComponentBehaviors.DiodeNoiseBehavior));
-            RegisterBehavior(typeof(ComponentBehaviors.DiodeTruncateBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.DiodeTemperatureBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.DiodeLoadBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.DiodeAcBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.DiodeNoiseBehavior));
+            this.RegisterBehavior(typeof(ComponentBehaviors.DiodeTruncateBehavior));
         }
 
         /// <summary>
