@@ -11,7 +11,7 @@ namespace SpiceSharp.Components
     /// BSIM2 model device
     /// </summary>
     [SpicePins("Drain", "Gate", "Source", "Bulk"), ConnectedPins(0, 2, 3)]
-    public class BSIM2 : CircuitComponent<CircuitModel>
+    public class BSIM2 : CircuitComponent
     {
         /// <summary>
         /// Register default behaviors

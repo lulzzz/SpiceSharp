@@ -9,7 +9,7 @@ namespace SpiceSharp.Components
     /// A current-controlled voltage source
     /// </summary>
     [SpicePins("H+", "H-"), VoltageDriver(0, 1)]
-    public class CurrentControlledVoltagesource : CircuitComponent<CircuitModel>
+    public class CurrentControlledVoltagesource : CircuitComponent
     {
         /// <summary>
         /// Register default behaviors

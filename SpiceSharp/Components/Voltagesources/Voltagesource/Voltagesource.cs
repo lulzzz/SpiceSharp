@@ -10,7 +10,7 @@ namespace SpiceSharp.Components
     /// An independent voltage source
     /// </summary>
     [SpicePins("V+", "V-"), VoltageDriver(0, 1), IndependentSource]
-    public class Voltagesource : CircuitComponent<CircuitModel>
+    public class Voltagesource : CircuitComponent
     {
         /// <summary>
         /// Register default behaviors
