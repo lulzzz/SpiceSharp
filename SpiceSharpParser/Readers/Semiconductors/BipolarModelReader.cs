@@ -26,7 +26,7 @@ namespace SpiceSharp.Parser.Readers
         {
             BJTModel model = new BJTModel(name);
 
-            var tempBehavior = (SpiceSharp.Behaviors.BJT.ModelTemperatureBehavior)model.GetBehavior(typeof(SpiceSharp.Behaviors.BJT.ModelTemperatureBehavior));
+            var tempBehavior = (SpiceSharp.Behaviors.BJT.ModelTemperatureBehavior)model.GetBehavior(typeof(SpiceSharp.Behaviors.TemperatureBehavior));
 
             if (type == "npn")
                 tempBehavior.SetNPN(true);

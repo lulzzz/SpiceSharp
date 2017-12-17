@@ -30,7 +30,7 @@ namespace SpiceSharp.Parser.Readers
                 throw new ParseException(parameters[1], "Model expected", false);
             dio.SetModel(netlist.FindModel<DiodeModel>(parameters[2]));
 
-            var loadBehavior = (SpiceSharp.Behaviors.DIO.LoadBehavior)dio.GetBehavior(typeof(SpiceSharp.Behaviors.DIO.LoadBehavior));
+            var loadBehavior = (SpiceSharp.Behaviors.DIO.LoadBehavior)dio.GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior));
             
             // Read the rest of the parameters
             for (int i = 3; i < parameters.Count; i++)

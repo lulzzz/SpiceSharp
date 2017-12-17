@@ -78,7 +78,7 @@ namespace SpiceSharp.Parser.Readers
                     BracketToken bt = parameters[i] as BracketToken;
                     Statement st = new Statement(StatementType.Waveform, bt.Name, bt.Parameters);
 
-                    var loadBehavior = (SpiceSharp.Behaviors.ISRC.LoadBehavior)isrc.GetBehavior(typeof(SpiceSharp.Behaviors.ISRC.LoadBehavior));
+                    var loadBehavior = (SpiceSharp.Behaviors.ISRC.LoadBehavior)isrc.GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior));
                     loadBehavior.ISRCwaveform = (Waveform)netlist.Readers.Read(st, netlist);
                 }
                 else

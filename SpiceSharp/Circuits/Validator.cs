@@ -40,6 +40,8 @@ namespace SpiceSharp.Circuits
         /// <param name="ckt">The circuit</param>
         public void Check(Circuit ckt)
         {
+            ckt.Objects.BuildOrderedComponentList();
+
             // Connect all objects in the circuit
             foreach (var o in ckt.Objects)
                 o.Setup(ckt);
@@ -52,8 +54,8 @@ namespace SpiceSharp.Circuits
             cgroup = 1;
 
             // Check all objects
-            foreach (var c in ckt.Objects)
-                CheckObject(c);
+            foreach (Entity entity in ckt.Objects)
+                CheckObject(entity);
 
             // Check if a voltage source is available
             if (!HasSource)

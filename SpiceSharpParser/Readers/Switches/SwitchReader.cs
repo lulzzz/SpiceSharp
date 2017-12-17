@@ -77,6 +77,9 @@ namespace SpiceSharp.Parser.Readers
         protected Entity GenerateCSW(Identifier name, List<Token> parameters, Netlist netlist)
         {
             CurrentSwitch csw = new CurrentSwitch(name);
+
+            var load = (SpiceSharp.Behaviors.CSW.LoadBehavior)csw.GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior));
+
             csw.ReadNodes(netlist.Path, parameters);
             switch (parameters.Count)
             {
@@ -103,10 +106,10 @@ namespace SpiceSharp.Parser.Readers
                 switch (parameters[4].image.ToLower())
                 {
                     case "on":
-                        csw.Set("on", 1.0);
+                        load.SetOn();
                         break;
                     case "off":
-                        csw.Set("off", 1.0);
+                        load.SetOff();
                         break;
                     default:
                         throw new ParseException(parameters[4], "ON or OFF expected");

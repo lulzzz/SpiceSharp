@@ -26,7 +26,7 @@ namespace SpiceSharpTest.Components.RLC.Resistor
             {
                 var R1 = ckt.Objects["R_1"];
                 var resistor = ((SpiceSharp.Components.Resistor)R1);
-                var resistorLoad = (SpiceSharp.Behaviors.RES.LoadBehavior)(resistor.GetBehavior(typeof(SpiceSharp.Behaviors.RES.LoadBehavior)));
+                var resistorLoad = (SpiceSharp.Behaviors.RES.LoadBehavior)(resistor.GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior)));
 
                 var current = resistorLoad.GetCurrent(ckt);
 
@@ -51,7 +51,7 @@ namespace SpiceSharpTest.Components.RLC.Resistor
             {
                 var R1 = ckt.Objects["R_1"];
                 var resistor = ((SpiceSharp.Components.Resistor)R1);
-                var resistorLoad = (SpiceSharp.Behaviors.RES.LoadBehavior)(resistor.GetBehavior(typeof(SpiceSharp.Behaviors.RES.LoadBehavior)));
+                var resistorLoad = (SpiceSharp.Behaviors.RES.LoadBehavior)(resistor.GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior)));
 
                 var current = resistorLoad.GetCurrent(ckt);
                 Assert.That.AreEqualWithTol(0.0, current, 0, 1e-8);
@@ -98,10 +98,10 @@ namespace SpiceSharpTest.Components.RLC.Resistor
                 var R2 = (SpiceSharp.Components.Resistor)ckt.Objects["R_2"];
 
                 var resistor1 = ((SpiceSharp.Components.Resistor)R1);
-                var resistor1Load = (SpiceSharp.Behaviors.RES.LoadBehavior)(resistor1.GetBehavior(typeof(SpiceSharp.Behaviors.RES.LoadBehavior)));
+                var resistor1Load = (SpiceSharp.Behaviors.RES.LoadBehavior)(resistor1.GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior)));
 
                 var resistor2 = ((SpiceSharp.Components.Resistor)R2);
-                var resistor2Load = (SpiceSharp.Behaviors.RES.LoadBehavior)(resistor2.GetBehavior(typeof(SpiceSharp.Behaviors.RES.LoadBehavior)));
+                var resistor2Load = (SpiceSharp.Behaviors.RES.LoadBehavior)(resistor2.GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior)));
 
                 var r1Current = resistor1Load.GetCurrent(ckt);
                 var r2Current = resistor2Load.GetCurrent(ckt);

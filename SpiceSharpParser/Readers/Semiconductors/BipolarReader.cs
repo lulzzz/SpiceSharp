@@ -45,8 +45,8 @@ namespace SpiceSharp.Parser.Readers
                     case WORD:
                         switch (parameters[i].image.ToLower())
                         {
-                            case "on": ((LoadBehavior)bjt.GetBehavior(typeof(LoadBehavior))).BJToff = false; break;
-                            case "off": ((LoadBehavior)bjt.GetBehavior(typeof(LoadBehavior))).BJToff = true; break;
+                            case "on": ((LoadBehavior)bjt.GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior))).BJToff = false; break;
+                            case "off": ((LoadBehavior)bjt.GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior))).BJToff = true; break;
                             default: throw new ParseException(parameters[i], "ON or OFF expected");
                         }
                         break;
@@ -54,7 +54,7 @@ namespace SpiceSharp.Parser.Readers
                     case ASSIGNMENT:
                         var at = parameters[i] as AssignmentToken;
                         if (at.Name.image.ToLower() == "ic")
-                            ((LoadBehavior)bjt.GetBehavior(typeof(LoadBehavior))).SetIC(netlist.ParseDoubleVector(at.Value));
+                            ((LoadBehavior)bjt.GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior))).SetIC(netlist.ParseDoubleVector(at.Value));
                         else
                             throw new ParseException(parameters[i], "IC expected");
                         break;

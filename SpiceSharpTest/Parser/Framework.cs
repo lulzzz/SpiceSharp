@@ -17,6 +17,12 @@ namespace SpiceSharpTest.Parser
     /// </summary>
     public class Framework
     {
+        [TestInitialize]
+        public void Init()
+        {
+            CircuitWarning.Warnings.Clear();
+        }
+
         /// <summary>
         /// Run a netlist using the standard parser
         /// </summary>
@@ -81,7 +87,7 @@ namespace SpiceSharpTest.Parser
         /// <summary>
         /// Test the parameters of a parameterized object
         /// </summary>
-        /// <param name="obj">The parameterized object</param>
+        /// <param name="p">The parameterized object</param>
         /// <param name="names">The parameter names</param>
         /// <param name="values">The expected parameter values</param>
         protected void TestParameters(object p, string[] names, double[] values)
@@ -90,11 +96,22 @@ namespace SpiceSharpTest.Parser
                 throw new Exception("Unit test error: parameter name array does not match the value array");
 
             Dictionary<string, Func<double>> getter = new Dictionary<string, Func<double>>();
-            var parameters = SpiceParameters.List(p.GetType());
-            foreach (var parameter in parameters)
+
+            if (p is Entity ent)
             {
-                foreach (var n in parameter.Names)
-                    getter.Add(n.Name.ToLower(), () => parameter.Get(p));
+                foreach (var parameterName in ent.GetParameters())
+                {
+                    getter.Add(parameterName.ToLower(), () => ent.Ask(parameterName).Value);
+                }
+            }
+            else
+            {
+                var parameters = SpiceParameters.List(p.GetType());
+                foreach (var parameter in parameters)
+                {
+                    foreach (var n in parameter.Names)
+                        getter.Add(n.Name.ToLower(), () => parameter.Get(p));
+                }
             }
 
             // Test all parameters

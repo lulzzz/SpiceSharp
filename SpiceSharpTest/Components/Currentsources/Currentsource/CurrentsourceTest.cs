@@ -20,17 +20,16 @@ namespace SpiceSharpTest.Components.Currentsources.Currentsource
             // 2) a voltage through the current source is 1000V
 
             var ckt = CreateResistorCircuit(10, 1000);
-
             ckt.Method = new Trapezoidal();
             OP simulation = new OP("Simulation");
             simulation.OnExportSimulationData += (object sender, SimulationData data) =>
             {
                 var R1 = data.Circuit.Objects["R_1"];
                 var I1 = data.Circuit.Objects["I_1"];
-                var resistorLoad = (SpiceSharp.Behaviors.RES.LoadBehavior)((Resistor)R1).GetBehavior(typeof(SpiceSharp.Behaviors.RES.LoadBehavior));
+                var resistorLoad = (SpiceSharp.Behaviors.RES.LoadBehavior)((Resistor)R1).GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior));
                 var currentOnResistor = resistorLoad.GetCurrent(data.Circuit);
 
-                var currentsourceLoad = (SpiceSharp.Behaviors.ISRC.LoadBehavior)((SpiceSharp.Components.Currentsource)I1).GetBehavior(typeof(SpiceSharp.Behaviors.ISRC.LoadBehavior));
+                var currentsourceLoad = (SpiceSharp.Behaviors.ISRC.LoadBehavior)((SpiceSharp.Components.Currentsource)I1).GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior));
                 var volategeOnCurrentSource = currentsourceLoad.GetV(data.Circuit);
 
                 Assert.That.AreEqualWithTol(10, currentOnResistor, 0, 1e-8);
@@ -60,9 +59,9 @@ namespace SpiceSharpTest.Components.Currentsources.Currentsource
             {
                 var R1 = data.Circuit.Objects["R1"];
                 var I1 = data.Circuit.Objects["I_1"];
-                var resistorLoad = (SpiceSharp.Behaviors.RES.LoadBehavior)((Resistor)R1).GetBehavior(typeof(SpiceSharp.Behaviors.RES.LoadBehavior));
+                var resistorLoad = (SpiceSharp.Behaviors.RES.LoadBehavior)((Resistor)R1).GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior));
                 var currentOnResistor = resistorLoad.GetCurrent(data.Circuit);
-                var currentsourceLoad = (SpiceSharp.Behaviors.ISRC.LoadBehavior)((SpiceSharp.Components.Currentsource)I1).GetBehavior(typeof(SpiceSharp.Behaviors.ISRC.LoadBehavior));
+                var currentsourceLoad = (SpiceSharp.Behaviors.ISRC.LoadBehavior)((SpiceSharp.Components.Currentsource)I1).GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior));
 
                 var volategeOnCurrentSource = currentsourceLoad.GetV(data.Circuit);
                 Assert.That.AreEqualWithTol(currentInAmp, currentOnResistor, 0, 1e-8);

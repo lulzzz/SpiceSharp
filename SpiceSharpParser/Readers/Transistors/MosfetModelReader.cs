@@ -33,7 +33,7 @@ namespace SpiceSharp.Parser.Readers
             Levels.Add(1, (Identifier name, string type, string version) =>
             {
                 var m = new MOS1Model(name);
-                var temparatureBehavior = (SpiceSharp.Behaviors.MOS1.ModelTemperatureBehavior)m.GetBehavior(typeof(SpiceSharp.Behaviors.MOS1.ModelTemperatureBehavior));
+                var temparatureBehavior = (SpiceSharp.Behaviors.MOS1.ModelTemperatureBehavior)m.GetBehavior(typeof(SpiceSharp.Behaviors.TemperatureBehavior));
                 switch (type)
                 {
                     case "nmos": temparatureBehavior.SetNMOS(true); break;
@@ -45,7 +45,7 @@ namespace SpiceSharp.Parser.Readers
             {
 
                 var m = new MOS2Model(name);
-                var temparatureBehavior = (SpiceSharp.Behaviors.MOS2.ModelTemperatureBehavior)m.GetBehavior(typeof(SpiceSharp.Behaviors.MOS2.ModelTemperatureBehavior));
+                var temparatureBehavior = (SpiceSharp.Behaviors.MOS2.ModelTemperatureBehavior)m.GetBehavior(typeof(SpiceSharp.Behaviors.TemperatureBehavior));
                 switch (type)
                 {
                     case "nmos": temparatureBehavior.SetNMOS(true); break;
@@ -56,7 +56,7 @@ namespace SpiceSharp.Parser.Readers
             Levels.Add(3, (Identifier name, string type, string version) =>
             {
                 var m = new MOS3Model(name);
-                var temparatureBehavior = (SpiceSharp.Behaviors.MOS3.ModelTemperatureBehavior)m.GetBehavior(typeof(SpiceSharp.Behaviors.MOS3.ModelTemperatureBehavior));
+                var temparatureBehavior = (SpiceSharp.Behaviors.MOS3.ModelTemperatureBehavior)m.GetBehavior(typeof(SpiceSharp.Behaviors.TemperatureBehavior));
                 switch (type)
                 {
                     case "nmos": temparatureBehavior.SetNMOS(true); break;

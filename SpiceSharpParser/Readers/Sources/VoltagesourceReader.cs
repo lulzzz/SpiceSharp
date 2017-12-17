@@ -78,7 +78,7 @@ namespace SpiceSharp.Parser.Readers
                     var bt = parameters[i] as BracketToken;
                     Statement st = new Statement(StatementType.Waveform, bt.Name, bt.Parameters);
                     object w = netlist.Readers.Read(st, netlist);
-                    ((SpiceSharp.Behaviors.VSRC.LoadBehavior)vsrc.GetBehavior(typeof(SpiceSharp.Behaviors.VSRC.LoadBehavior))).VSRCwaveform = (Waveform)w;
+                    ((SpiceSharp.Behaviors.VSRC.LoadBehavior)vsrc.GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior))).VSRCwaveform = (Waveform)w;
                 }
                 else
                     throw new ParseException(parameters[i], "Unrecognized parameter");

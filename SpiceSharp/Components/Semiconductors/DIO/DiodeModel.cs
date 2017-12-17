@@ -15,6 +15,7 @@ namespace SpiceSharp.Components
         public DiodeModel(Identifier name) : base(name)
         {
             RegisterBehavior(new ModelTemperatureBehavior());
+            RegisterBehavior(new ModelNoiseBehavior());
         }
     }
 }

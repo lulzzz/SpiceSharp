@@ -124,7 +124,7 @@ namespace SpiceSharp.Circuits
             // Set the parameters
             NamedParameters[parameter].Set(value);
         }
-
+      
         /// <summary>
         /// Ask a parameter
         /// </summary>
@@ -137,6 +137,14 @@ namespace SpiceSharp.Circuits
 
             // Ask the parameters
             return NamedParameters[parameter];
+        }
+
+        public virtual IEnumerable<string> GetParameters()
+        {
+            if (!CollectedParameters)
+                CollectNamedParameters();
+
+            return new List<string>(NamedParameters.Keys);
         }
     }
 }

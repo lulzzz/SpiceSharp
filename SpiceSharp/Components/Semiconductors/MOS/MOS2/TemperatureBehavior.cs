@@ -110,7 +110,8 @@ namespace SpiceSharp.Behaviors.MOS2
         /// <returns></returns>
         public override void Setup(Entity component, Circuit ckt)
         {
-            modeltemp = GetBehavior<ModelTemperatureBehavior>(component);
+            var mos2 = (SpiceSharp.Components.MOS2)component;
+            modeltemp = GetBehavior<ModelTemperatureBehavior>(mos2.Model);
             name = component.Name;
         }
 

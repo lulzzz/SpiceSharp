@@ -98,7 +98,7 @@ namespace SpiceSharp.Parser.Readers.Exports
         public override double Extract(SimulationData data)
         {
             Voltagesource vsrc = (Voltagesource)data.GetObject(Source);
-            var loadBehavior = (SpiceSharp.Behaviors.VSRC.LoadBehavior)vsrc.GetBehavior(typeof(SpiceSharp.Behaviors.VSRC.LoadBehavior));
+            var loadBehavior = (SpiceSharp.Behaviors.VSRC.LoadBehavior)vsrc.GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior));
 
             if (data.Circuit.State.Domain == State.DomainTypes.Frequency || data.Circuit.State.Domain == State.DomainTypes.Laplace)
                 return data.Circuit.State.Solution[loadBehavior.VSRCbranch];
@@ -145,7 +145,7 @@ namespace SpiceSharp.Parser.Readers.Exports
         public override double Extract(SimulationData data)
         {
             Voltagesource vsrc = (Voltagesource)data.GetObject(Source);
-            var loadBehavior = (SpiceSharp.Behaviors.VSRC.LoadBehavior)vsrc.GetBehavior(typeof(SpiceSharp.Behaviors.VSRC.LoadBehavior));
+            var loadBehavior = (SpiceSharp.Behaviors.VSRC.LoadBehavior)vsrc.GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior));
 
             switch (data.Circuit.State.Domain)
             {
@@ -196,7 +196,7 @@ namespace SpiceSharp.Parser.Readers.Exports
         public override double Extract(SimulationData data)
         {
             Voltagesource vsrc = (Voltagesource)data.GetObject(Source);
-            var loadBehavior = (SpiceSharp.Behaviors.VSRC.LoadBehavior)vsrc.GetBehavior(typeof(SpiceSharp.Behaviors.VSRC.LoadBehavior));
+            var loadBehavior = (SpiceSharp.Behaviors.VSRC.LoadBehavior)vsrc.GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior));
 
             switch (data.Circuit.State.Domain)
             {
@@ -247,7 +247,7 @@ namespace SpiceSharp.Parser.Readers.Exports
         public override double Extract(SimulationData data)
         {
             Voltagesource vsrc = (Voltagesource)data.GetObject(Source);
-            var loadBehavior = (SpiceSharp.Behaviors.VSRC.LoadBehavior)vsrc.GetBehavior(typeof(SpiceSharp.Behaviors.VSRC.LoadBehavior));
+            var loadBehavior = (SpiceSharp.Behaviors.VSRC.LoadBehavior)vsrc.GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior));
 
             switch (data.Circuit.State.Domain)
             {
@@ -300,7 +300,7 @@ namespace SpiceSharp.Parser.Readers.Exports
         public override double Extract(SimulationData data)
         {
             Voltagesource vsrc = (Voltagesource)data.GetObject(Source);
-            var loadBehavior = (SpiceSharp.Behaviors.VSRC.LoadBehavior)vsrc.GetBehavior(typeof(SpiceSharp.Behaviors.VSRC.LoadBehavior));
+            var loadBehavior = (SpiceSharp.Behaviors.VSRC.LoadBehavior)vsrc.GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior));
 
             switch (data.Circuit.State.Domain)
             {
@@ -353,7 +353,7 @@ namespace SpiceSharp.Parser.Readers.Exports
         public override double Extract(SimulationData data)
         {
             Voltagesource vsrc = (Voltagesource)data.GetObject(Source);
-            var loadBehavior = (SpiceSharp.Behaviors.VSRC.LoadBehavior)vsrc.GetBehavior(typeof(SpiceSharp.Behaviors.VSRC.LoadBehavior));
+            var loadBehavior = (SpiceSharp.Behaviors.VSRC.LoadBehavior)vsrc.GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior));
 
             switch (data.Circuit.State.Domain)
             {
