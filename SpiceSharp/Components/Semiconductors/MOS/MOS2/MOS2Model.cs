@@ -15,6 +15,7 @@ namespace SpiceSharp.Components
         public MOS2Model(Identifier name) : base(name)
         {
             RegisterBehavior(new ModelTemperatureBehavior());
+            RegisterBehavior(new ModelNoiseBehavior());
         }
     }
 }

@@ -11,12 +11,12 @@ namespace SpiceSharp
         /// <summary>
         /// Gets or sets the raw value of the parameter without changing the Given parameter
         /// </summary>
-        public double Value { get; set; }
+        public virtual double Value { get; set; }
 
         /// <summary>
         /// Gets whether or not the parameter was specified
         /// </summary>
-        public bool Given { get; private set; }
+        public bool Given { get; protected set; }
 
         /// <summary>
         /// Constructor
@@ -32,7 +32,7 @@ namespace SpiceSharp
         /// Clone the parameter
         /// </summary>
         /// <returns></returns>
-        public object Clone()
+        public virtual object Clone()
         {
             var clone = new Parameter()
             {
@@ -46,7 +46,7 @@ namespace SpiceSharp
         /// Copy the parameter from another parameter
         /// </summary>
         /// <param name="source"></param>
-        public void CopyFrom(Parameter source)
+        public virtual void CopyFrom(Parameter source)
         {
             Value = source.Value;
             Given = source.Given;
@@ -56,7 +56,7 @@ namespace SpiceSharp
         /// Copy the parameter to another parameter
         /// </summary>
         /// <param name="target"></param>
-        public void CopyTo(Parameter target)
+        public virtual void CopyTo(Parameter target)
         {
             target.Value = Value;
             target.Given = Given;
@@ -66,7 +66,7 @@ namespace SpiceSharp
         /// Specify the parameter
         /// </summary>
         /// <param name="value"></param>
-        public void Set(double value)
+        public virtual void Set(double value)
         {
             Value = value;
             Given = true;

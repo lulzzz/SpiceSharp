@@ -5,6 +5,7 @@ using SpiceSharp.Circuits;
 using SpiceSharp.Parameters;
 using SpiceSharp.Parser.Subcircuits;
 using static SpiceSharp.Parser.SpiceSharpParserConstants;
+using System.Linq;
 
 namespace SpiceSharp.Parser.Readers
 {
@@ -50,9 +51,9 @@ namespace SpiceSharp.Parser.Readers
         /// <param name="start">The starting index</param>
         public static void ReadParameters(this Netlist netlist, object obj, List<Token> parameters, int start = 0)
         {
-            var dict = GetParameters(obj.GetType());
+            var compontentParameters = GetParameters(obj.GetType());
             for (int i = start; i < parameters.Count; i++)
-            {
+            {              
                 if (parameters[i].kind == TokenConstants.ASSIGNMENT)
                 {
                     AssignmentToken at = parameters[i] as AssignmentToken;
@@ -63,29 +64,69 @@ namespace SpiceSharp.Parser.Readers
                         throw new ParseException(parameters[i], "Invalid assignment");
 
                     SpiceParameter p;
+                    if (compontentParameters.TryGetValue(pname, out p) == false)
+                    {
+                        continue; //TODO: improve ...
+                    }
+                    
                     switch (at.Value.kind)
                     {
                         case VALUE:
-                            if (dict.TryGetValue(pname, out p))
+                            if (compontentParameters.TryGetValue(pname, out p))
                                 p.Set(obj, netlist.Readers.ParseDouble(at.Value.image.ToLower()));
                             else
                                 Diagnostics.CircuitWarning.Warning(obj, $"Unrecognized parameter \"{pname}\"");
                             break;
                         case EXPRESSION:
-                            if (dict.TryGetValue(pname, out p))
+                            if (compontentParameters.TryGetValue(pname, out p))
                                 p.Set(obj, netlist.Readers.ParseDouble(at.Value.image.Substring(1, at.Value.image.Length - 2).ToLower()));
                             else
                                 Diagnostics.CircuitWarning.Warning(obj, $"Unrecognized parameter \"{pname}\"");
                             break;
                         case WORD:
                         case STRING:
-                            if (dict.TryGetValue(pname, out p))
+                            if (compontentParameters.TryGetValue(pname, out p))
                                 p.Set(obj, netlist.ParseString(at.Value));
                             else
                                 Diagnostics.CircuitWarning.Warning(obj, $"Unrecognized parameter \"{pname}\"");
                             break;
                         default:
                             throw new ParseException(parameters[i], "Invalid assignment");
+                    }
+                }
+            }
+
+            if (obj is Entity ent) {
+                var behaviorParameters = ent.GetParameters();
+
+                for (int i = start; i < parameters.Count; i++)
+                {
+                    if (parameters[i].kind == TokenConstants.ASSIGNMENT)
+                    {
+                        AssignmentToken at = parameters[i] as AssignmentToken;
+                        string pname;
+                        if (at.Name.kind == WORD)
+                            pname = at.Name.image.ToLower();
+                        else
+                            throw new ParseException(parameters[i], "Invalid assignment");
+
+                        if (behaviorParameters.Contains(pname) == false)
+                        {
+                            continue;
+                        }
+
+                        switch (at.Value.kind)
+                        {
+                            case VALUE:
+                                ent.Set(pname, netlist.Readers.ParseDouble(at.Value.image.ToLower()));
+                                break;
+                            case EXPRESSION:
+                                 ent.Set(pname, netlist.Readers.ParseDouble(at.Value.image.Substring(1, at.Value.image.Length - 2).ToLower()));
+                                break;
+                            case WORD:
+                            default:
+                                throw new ParseException(parameters[i], "Invalid assignment");
+                        }
                     }
                 }
             }

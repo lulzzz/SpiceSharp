@@ -78,6 +78,16 @@ namespace SpiceSharp.Components
             RegisterBehavior(new AcceptBehavior());
         }
 
+        protected override void CollectNamedParameters()
+        {
+            base.CollectNamedParameters();
+            var load = (SpiceSharp.Behaviors.VSRC.LoadBehavior)this.GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior));
+            if (load.VSRCwaveform != null)
+            {
+                base.CollectNamedParameters(load.VSRCwaveform);
+            }
+        }
+
         /// <summary>
         /// Setup the voltage source
         /// </summary>

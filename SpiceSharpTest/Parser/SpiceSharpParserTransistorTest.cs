@@ -117,7 +117,7 @@ namespace SpiceSharpTest.Parser
                 "+ vdd = 62 cgso = 63 cgdo = 64 cgbo = 65 xpart = 66 rsh = 67 js = 68 pb = 69 mj = 70 pbsw = 71",
                 "+ mjsw = 72 cj = 73 cjsw = 74 wdf = 75 dell = 76",
                 "MB d g s b lvl4mod w = 10u l = 11u ad = 1e-12 as = 2e-12 nrs = 2 nrd = 3 pd = 30u ps = 40u");
-            Test<BSIM1Model>(netlist, new Identifier("lvl4mod"), new string[]
+            Test<BSIM1>(netlist, new Identifier("MB"), new string[]
             {
                 "vfb", "lvfb", "wvfb", "phi", "lphi", "wphi", "k1", "lk1", "wk1", "k2", "lk2", "wk2", "eta", "leta",
                 "weta", "x2e", "lx2e", "wx2e", "x3e", "lx3e", "wx3e", "dl", "dw", "muz", "x2mz", "lx2mz", "wx2mz",

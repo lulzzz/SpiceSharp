@@ -19,12 +19,6 @@ namespace SpiceSharp.Behaviors.BJT
         private ModelTemperatureBehavior modeltemp;
 
         /// <summary>
-        /// Parameters
-        /// </summary>
-        [SpiceName("area"), SpiceInfo("Area factor")]
-        public Parameter BJTarea { get; } = new Parameter(1);
-
-        /// <summary>
         /// Noise sources by their index
         /// </summary>
         private const int BJTRCNOIZ = 0;
@@ -80,9 +74,9 @@ namespace SpiceSharp.Behaviors.BJT
             var noise = state.Noise;
 
             // Set noise parameters
-            BJTnoise.Generators[BJTRCNOIZ].Set(modeltemp.BJTcollectorConduct * BJTarea);
+            BJTnoise.Generators[BJTRCNOIZ].Set(modeltemp.BJTcollectorConduct * load.BJTarea);
             BJTnoise.Generators[BJTRBNOIZ].Set(state.States[0][load.BJTstate + LoadBehavior.BJTgx]);
-            BJTnoise.Generators[BJT_RE_NOISE].Set(modeltemp.BJTemitterConduct * BJTarea);
+            BJTnoise.Generators[BJT_RE_NOISE].Set(modeltemp.BJTemitterConduct * load.BJTarea);
             BJTnoise.Generators[BJTICNOIZ].Set(state.States[0][load.BJTstate + LoadBehavior.BJTcc]);
             BJTnoise.Generators[BJTIBNOIZ].Set(state.States[0][load.BJTstate + LoadBehavior.BJTcb]);
             BJTnoise.Generators[BJTFLNOIZ].Set(modelnoise.BJTfNcoef * Math.Exp(modelnoise.BJTfNexp * Math.Log(Math.Max(Math.Abs(state.States[0][load.BJTstate + LoadBehavior.BJTcb]), 1e-38))) / noise.Freq);

@@ -56,6 +56,16 @@ namespace SpiceSharp.Components
             Connect(pos, neg, cont_pos, cont_neg);
         }
 
+        protected override void CollectNamedParameters()
+        {
+            base.CollectNamedParameters();
+
+            foreach (var behavior in Model.Behaviors.Values)
+            {
+                base.CollectNamedParameters(behavior);
+            }
+        }
+
         /// <summary>
         /// Setup the voltage-controlled switch
         /// </summary>

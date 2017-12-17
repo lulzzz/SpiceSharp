@@ -14,7 +14,7 @@ namespace SpiceSharp.Circuits
         /// <summary>
         /// Available behaviors for the circuit object
         /// </summary>
-        protected Dictionary<Type, Behavior> Behaviors { get; } = new Dictionary<Type, Behavior>();
+        public Dictionary<Type, Behavior> Behaviors { get; } = new Dictionary<Type, Behavior>();
 
         /// <summary>
         /// A table of named parameters
@@ -49,7 +49,7 @@ namespace SpiceSharp.Circuits
         /// <summary>
         /// Collect all named parameters from the behaviors
         /// </summary>
-        protected void CollectNamedParameters()
+        protected virtual void CollectNamedParameters()
         {
             foreach (var behavior in Behaviors.Values)
                 CollectNamedParameters(behavior);
@@ -72,6 +72,17 @@ namespace SpiceSharp.Circuits
                     var names = property.GetCustomAttributes<SpiceName>();
                     foreach (SpiceName name in names)
                         NamedParameters.Add(name.Name, parameter);
+                }
+
+                if (property.PropertyType == typeof(double))
+                {
+                    var nameAttrs = property.GetCustomAttributes<SpiceName>();
+
+                    if (nameAttrs != null)
+                    {
+                        foreach (SpiceName name in nameAttrs)
+                            NamedParameters.Add(name.Name, new PropertyParameter(property, obj));
+                    }
                 }
             }
         }

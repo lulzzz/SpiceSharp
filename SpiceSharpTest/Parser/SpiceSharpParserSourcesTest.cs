@@ -29,7 +29,7 @@ namespace SpiceSharpTest.Parser
                 new Identifier("b")
             });
             var vsrc = Test<Voltagesource>(netlist, new Identifier("v2"));
-            var vsrcLoad = (SpiceSharp.Behaviors.VSRC.LoadBehavior)vsrc.GetBehavior(typeof(SpiceSharp.Behaviors.VSRC.LoadBehavior));
+            var vsrcLoad = (SpiceSharp.Behaviors.VSRC.LoadBehavior)vsrc.GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior));
 
             TestParameters(vsrcLoad.VSRCwaveform, new string[] { "v1", "v2", "td", "tr", "tf", "pw", "per" }, new double[] { 0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 });
             vsrc = Test<Voltagesource>(netlist, new Identifier("v3"));
@@ -53,7 +53,7 @@ namespace SpiceSharpTest.Parser
                 new Identifier("b")
             });
             var isrc = Test<Currentsource>(netlist, new Identifier("i2"));
-            var isrcLoad = (SpiceSharp.Behaviors.ISRC.LoadBehavior)isrc.GetBehavior(typeof(SpiceSharp.Behaviors.VSRC.LoadBehavior));
+            var isrcLoad = (SpiceSharp.Behaviors.ISRC.LoadBehavior)isrc.GetBehavior(typeof(SpiceSharp.Behaviors.LoadBehavior));
 
             TestParameters(isrcLoad.ISRCwaveform, new string[] { "v1", "v2", "td", "tr", "tf", "pw", "per" }, new double[] { 0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 });
             isrc = Test<Currentsource>(netlist, new Identifier("i3"));

@@ -118,6 +118,7 @@
     <Compile Include="Components\Voltagesources\VSRC\AcBehavior.cs" />
     <Compile Include="Components\Voltagesources\VSRC\AcceptBehavior.cs" />
     <Compile Include="Components\Voltagesources\VSRC\LoadBehavior.cs" />
+    <Compile Include="PropertyParameter.cs" />
     <Compile Include="Parameter.cs" />
     <Compile Include="Simulations\BaseSimulation.cs" />
     <Compile Include="Simulations\Behaviors\TemperatureBehavior.cs" />

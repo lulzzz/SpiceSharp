@@ -51,6 +51,16 @@ namespace SpiceSharp.Components
             RegisterBehavior(new NoiseBehavior());
         }
 
+        protected override void CollectNamedParameters()
+        {
+            base.CollectNamedParameters();
+            
+            foreach (var behavior in Model.Behaviors.Values)
+            {
+                base.CollectNamedParameters(behavior);
+            }
+        }
+
         /// <summary>
         /// Setup the device
         /// </summary>

@@ -103,7 +103,7 @@ namespace SpiceSharp.Behaviors.BJT
         public Parameter BJTbaseFractionBCcap { get; } = new Parameter(1);
         [SpiceName("tr"), SpiceInfo("Ideal reverse transit time")]
         public Parameter BJTtransitTimeR { get; } = new Parameter();
-        [SpiceName("cjs"), SpiceName("ccs"), SpiceInfo("Zero bias C-S capacitance")]
+        [SpiceName("cjs"), /*SpiceName("ccs"),*/ SpiceInfo("Zero bias C-S capacitance")]
         public Parameter BJTcapCS { get; } = new Parameter();
         [SpiceName("vjs"), SpiceName("ps"), SpiceInfo("Substrate junction built in potential")]
         public Parameter BJTpotentialSubstrate { get; } = new Parameter(.75);

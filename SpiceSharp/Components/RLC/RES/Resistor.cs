@@ -59,6 +59,18 @@ namespace SpiceSharp.Components
             Connect(pos, neg);
         }
 
+        protected override void CollectNamedParameters()
+        {
+            base.CollectNamedParameters();
+            if (Model != null)
+            {
+                foreach (var behavior in Model.Behaviors.Values)
+                {
+                    base.CollectNamedParameters(behavior);
+                }
+            }
+        }
+
         /// <summary>
         /// Setup the resistor
         /// </summary>

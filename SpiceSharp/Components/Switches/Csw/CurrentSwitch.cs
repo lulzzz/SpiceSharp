@@ -65,6 +65,16 @@ namespace SpiceSharp.Components
             Priority = -1;
         }
 
+        protected override void CollectNamedParameters()
+        {
+            base.CollectNamedParameters();
+
+            foreach (var behavior in Model.Behaviors.Values)
+            {
+                base.CollectNamedParameters(behavior);
+            }
+        }
+
         /// <summary>
         /// Setup the current-controlled switch
         /// </summary>
