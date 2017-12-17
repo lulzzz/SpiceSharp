@@ -58,7 +58,7 @@ namespace SpiceSharp.Parser.Readers
                     if (at.Name.image.ToLower() == "ic")
                     {
                         double ic = netlist.ParseDouble(at.Value);
-                        cap.CAPinitCond.Set(ic);
+                        cap.Set("ic", ic);
                         parameters.RemoveAt(i);
                         break;
                     }
@@ -67,7 +67,7 @@ namespace SpiceSharp.Parser.Readers
 
             // The rest is just dependent on the number of parameters
             if (parameters.Count == 3)
-                cap.CAPcapac.Set(netlist.ParseDouble(parameters[2]));
+                cap.Set("capacitance", netlist.ParseDouble(parameters[2]));
             else
             {
                 cap.SetModel(netlist.FindModel<CapacitorModel>(parameters[2]));
@@ -81,7 +81,7 @@ namespace SpiceSharp.Parser.Readers
                         throw new ParseException(parameters[2], "Model name expected");
                 }
                 netlist.ReadParameters(cap, parameters, 2);
-                if (!cap.CAPlength.Given)
+                if (!cap.Ask("l").Given)
                     throw new ParseException(parameters[1], "L needs to be specified", false);
             }
 
@@ -103,7 +103,7 @@ namespace SpiceSharp.Parser.Readers
             // Read the value
             if (parameters.Count < 3)
                 throw new ParseException(parameters[1], "Inductance expected", false);
-            ind.INDinduct.Set(netlist.ParseDouble(parameters[2]));
+            ind.Set("inductance", netlist.ParseDouble(parameters[2]));
 
             // Read initial conditions
             netlist.ReadParameters(ind, parameters, 3);
@@ -134,7 +134,7 @@ namespace SpiceSharp.Parser.Readers
             if (!ReaderExtension.IsName(parameters[1]))
                 throw new ParseException(parameters[1], "Component name expected");
             mut.MUTind2 = new Identifier(parameters[1].image);
-            mut.MUTcoupling.Set(netlist.ParseDouble(parameters[2]));
+            mut.Set("k", netlist.ParseDouble(parameters[2]));
             return mut;
         }
 
@@ -153,13 +153,13 @@ namespace SpiceSharp.Parser.Readers
             // We have two possible formats:
             // Normal: RXXXXXXX N1 N2 VALUE
             if (parameters.Count == 3)
-                res.RESresist.Set(netlist.ParseDouble(parameters[2]));
+                res.Set("resistance", netlist.ParseDouble(parameters[2]));
             else
             {
                 // Read the model
                 res.SetModel(netlist.FindModel<ResistorModel>(parameters[2]));
                 netlist.ReadParameters(res, parameters, 3);
-                if (!res.RESlength.Given)
+                if (!res.Ask("l").Given)
                     throw new ParseException(parameters[parameters.Count - 1], "L needs to be specified", false);
             }
             return res;

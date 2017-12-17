@@ -94,15 +94,16 @@ namespace SpiceSharp.Parser.Readers.Exports
         /// <summary>
         /// Read the voltage and write to the output
         /// </summary>
-        /// <param name="stream">Stream</param>
         /// <param name="data">Simulation data</param>
         public override double Extract(SimulationData data)
         {
             Voltagesource vsrc = (Voltagesource)data.GetObject(Source);
+            var loadBehavior = (SpiceSharp.Behaviors.VSRC.LoadBehavior)vsrc.GetBehavior(typeof(SpiceSharp.Behaviors.VSRC.LoadBehavior));
+
             if (data.Circuit.State.Domain == State.DomainTypes.Frequency || data.Circuit.State.Domain == State.DomainTypes.Laplace)
-                return data.Circuit.State.Solution[vsrc.VSRCbranch];
+                return data.Circuit.State.Solution[loadBehavior.VSRCbranch];
             else
-                return vsrc.GetCurrent(data.Circuit);
+                return loadBehavior.GetCurrent(data.Circuit);
         }
     }
 
@@ -144,13 +145,15 @@ namespace SpiceSharp.Parser.Readers.Exports
         public override double Extract(SimulationData data)
         {
             Voltagesource vsrc = (Voltagesource)data.GetObject(Source);
+            var loadBehavior = (SpiceSharp.Behaviors.VSRC.LoadBehavior)vsrc.GetBehavior(typeof(SpiceSharp.Behaviors.VSRC.LoadBehavior));
+
             switch (data.Circuit.State.Domain)
             {
                 case State.DomainTypes.Frequency:
                 case State.DomainTypes.Laplace:
-                    return data.Circuit.State.Solution[vsrc.VSRCbranch];
+                    return data.Circuit.State.Solution[loadBehavior.VSRCbranch];
                 default:
-                    return vsrc.GetCurrent(data.Circuit);
+                    return loadBehavior.GetCurrent(data.Circuit);
             }
         }
     }
@@ -193,11 +196,13 @@ namespace SpiceSharp.Parser.Readers.Exports
         public override double Extract(SimulationData data)
         {
             Voltagesource vsrc = (Voltagesource)data.GetObject(Source);
+            var loadBehavior = (SpiceSharp.Behaviors.VSRC.LoadBehavior)vsrc.GetBehavior(typeof(SpiceSharp.Behaviors.VSRC.LoadBehavior));
+
             switch (data.Circuit.State.Domain)
             {
                 case State.DomainTypes.Frequency:
                 case State.DomainTypes.Laplace:
-                    return data.Circuit.State.iSolution[vsrc.VSRCbranch];
+                    return data.Circuit.State.iSolution[loadBehavior.VSRCbranch];
                 default:
                     return 0.0;
             }
@@ -242,15 +247,17 @@ namespace SpiceSharp.Parser.Readers.Exports
         public override double Extract(SimulationData data)
         {
             Voltagesource vsrc = (Voltagesource)data.GetObject(Source);
+            var loadBehavior = (SpiceSharp.Behaviors.VSRC.LoadBehavior)vsrc.GetBehavior(typeof(SpiceSharp.Behaviors.VSRC.LoadBehavior));
+
             switch (data.Circuit.State.Domain)
             {
                 case State.DomainTypes.Frequency:
                 case State.DomainTypes.Laplace:
-                    double r = data.Circuit.State.Solution[vsrc.VSRCbranch];
-                    double i = data.Circuit.State.iSolution[vsrc.VSRCbranch];
+                    double r = data.Circuit.State.Solution[loadBehavior.VSRCbranch];
+                    double i = data.Circuit.State.iSolution[loadBehavior.VSRCbranch];
                     return Math.Sqrt(r * r + i * i);
                 default:
-                    return vsrc.GetCurrent(data.Circuit);
+                    return loadBehavior.GetCurrent(data.Circuit);
             }
         }
     }
@@ -293,15 +300,17 @@ namespace SpiceSharp.Parser.Readers.Exports
         public override double Extract(SimulationData data)
         {
             Voltagesource vsrc = (Voltagesource)data.GetObject(Source);
+            var loadBehavior = (SpiceSharp.Behaviors.VSRC.LoadBehavior)vsrc.GetBehavior(typeof(SpiceSharp.Behaviors.VSRC.LoadBehavior));
+
             switch (data.Circuit.State.Domain)
             {
                 case State.DomainTypes.Frequency:
                 case State.DomainTypes.Laplace:
-                    double r = data.Circuit.State.Solution[vsrc.VSRCbranch];
-                    double i = data.Circuit.State.iSolution[vsrc.VSRCbranch];
+                    double r = data.Circuit.State.Solution[loadBehavior.VSRCbranch];
+                    double i = data.Circuit.State.iSolution[loadBehavior.VSRCbranch];
                     return 180.0 / Math.PI * Math.Atan2(i, r);
                 default:
-                    return vsrc.GetCurrent(data.Circuit);
+                    return loadBehavior.GetCurrent(data.Circuit);
             }
         }
     }
@@ -344,15 +353,17 @@ namespace SpiceSharp.Parser.Readers.Exports
         public override double Extract(SimulationData data)
         {
             Voltagesource vsrc = (Voltagesource)data.GetObject(Source);
+            var loadBehavior = (SpiceSharp.Behaviors.VSRC.LoadBehavior)vsrc.GetBehavior(typeof(SpiceSharp.Behaviors.VSRC.LoadBehavior));
+
             switch (data.Circuit.State.Domain)
             {
                 case State.DomainTypes.Frequency:
                 case State.DomainTypes.Laplace:
-                    double r = data.Circuit.State.Solution[vsrc.VSRCbranch];
-                    double i = data.Circuit.State.iSolution[vsrc.VSRCbranch];
+                    double r = data.Circuit.State.Solution[loadBehavior.VSRCbranch];
+                    double i = data.Circuit.State.iSolution[loadBehavior.VSRCbranch];
                     return 10.0 * Math.Log10(r * r + i * i);
                 default:
-                    return 20.0 * Math.Log10(vsrc.GetCurrent(data.Circuit));
+                    return 20.0 * Math.Log10(loadBehavior.GetCurrent(data.Circuit));
             }
         }
     }

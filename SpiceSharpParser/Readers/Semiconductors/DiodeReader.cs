@@ -30,6 +30,8 @@ namespace SpiceSharp.Parser.Readers
                 throw new ParseException(parameters[1], "Model expected", false);
             dio.SetModel(netlist.FindModel<DiodeModel>(parameters[2]));
 
+            var loadBehavior = (SpiceSharp.Behaviors.DIO.LoadBehavior)dio.GetBehavior(typeof(SpiceSharp.Behaviors.DIO.LoadBehavior));
+            
             // Read the rest of the parameters
             for (int i = 3; i < parameters.Count; i++)
             {
@@ -39,10 +41,10 @@ namespace SpiceSharp.Parser.Readers
                         switch (parameters[i].image.ToLower())
                         {
                             case "on":
-                                dio.DIOoff = false;
+                                loadBehavior.DIOoff = false;
                                 break;
                             case "off":
-                                dio.DIOoff = true;
+                                loadBehavior.DIOoff = true;
                                 break;
                             default:
                                 throw new ParseException(parameters[i], "ON or OFF expected");
@@ -51,16 +53,16 @@ namespace SpiceSharp.Parser.Readers
                     case ASSIGNMENT:
                         AssignmentToken at = parameters[i] as AssignmentToken;
                         if (at.Name.image.ToLower() == "ic")
-                            dio.DIOinitCond = netlist.ParseDouble(at.Value);
+                            dio.Set("ic", netlist.ParseDouble(at.Value));
                         else
                             throw new ParseException(parameters[i], "IC expected");
                         break;
                     case VALUE:
                     case EXPRESSION:
-                        if (!dio.DIOarea.Given)
-                            dio.DIOarea.Set(netlist.ParseDouble(parameters[i]));
-                        else if (!dio.DIOtemp.Given)
-                            dio.DIO_TEMP = netlist.ParseDouble(parameters[i]);
+                        if (!dio.Ask("area").Given)
+                            dio.Set("area", netlist.ParseDouble(parameters[i]));
+                        else if (!dio.Ask("temp").Given)
+                            dio.Set("temp", netlist.ParseDouble(parameters[i]));
                         else
                             throw new ParseException(parameters[i], "Invalid parameter");
                         break;

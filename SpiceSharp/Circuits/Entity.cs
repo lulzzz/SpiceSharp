@@ -130,7 +130,7 @@ namespace SpiceSharp.Circuits
         /// </summary>
         /// <param name="parameter">Parameter name</param>
         /// <returns></returns>
-        public virtual double Ask(string parameter)
+        public virtual Parameter Ask(string parameter)
         {
             if (!CollectedParameters)
                 CollectNamedParameters();

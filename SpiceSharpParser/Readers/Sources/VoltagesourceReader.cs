@@ -52,22 +52,22 @@ namespace SpiceSharp.Parser.Readers
                 if (i == 2 && parameters[i].image.ToLower() == "dc")
                 {
                     i++;
-                    vsrc.VSRCdcValue.Set(netlist.ParseDouble(parameters[i]));
+                    vsrc.Set("dc", netlist.ParseDouble(parameters[i]));
                 }
                 else if (i == 2 && ReaderExtension.IsValue(parameters[i]))
-                    vsrc.VSRCdcValue.Set(netlist.ParseDouble(parameters[i]));
+                    vsrc.Set("dc", netlist.ParseDouble(parameters[i]));
 
                 // AC specification
                 else if (parameters[i].image.ToLower() == "ac")
                 {
                     i++;
-                    vsrc.VSRCacMag.Set(netlist.ParseDouble(parameters[i]));
+                    vsrc.Set("acmag", netlist.ParseDouble(parameters[i]));
 
                     // Look forward for one more value
                     if (i + 1 < parameters.Count && ReaderExtension.IsValue(parameters[i + 1]))
                     {
                         i++;
-                        vsrc.VSRCacPhase.Set(netlist.ParseDouble(parameters[i]));
+                        vsrc.Set("acphase", netlist.ParseDouble(parameters[i]));
                     }
                 }
 
@@ -78,7 +78,7 @@ namespace SpiceSharp.Parser.Readers
                     var bt = parameters[i] as BracketToken;
                     Statement st = new Statement(StatementType.Waveform, bt.Name, bt.Parameters);
                     object w = netlist.Readers.Read(st, netlist);
-                    vsrc.VSRCwaveform = (Waveform)w;
+                    ((SpiceSharp.Behaviors.VSRC.LoadBehavior)vsrc.GetBehavior(typeof(SpiceSharp.Behaviors.VSRC.LoadBehavior))).VSRCwaveform = (Waveform)w;
                 }
                 else
                     throw new ParseException(parameters[i], "Unrecognized parameter");
@@ -100,7 +100,7 @@ namespace SpiceSharp.Parser.Readers
 
             if (parameters.Count < 5)
                 throw new ParseException(parameters[3], "Value expected");
-            vcvs.VCVScoeff.Set(netlist.ParseDouble(parameters[4]));
+            vcvs.Set("gain", netlist.ParseDouble(parameters[4]));
             return vcvs;
         }
 
@@ -124,7 +124,7 @@ namespace SpiceSharp.Parser.Readers
             if (!ReaderExtension.IsName(parameters[2]))
                 throw new ParseException(parameters[2], "Component name expected");
             ccvs.CCVScontName = new Identifier(parameters[2].image);
-            ccvs.CCVScoeff.Set(netlist.ParseDouble(parameters[3]));
+            ccvs.Set("gain", netlist.ParseDouble(parameters[3]));
             return ccvs;
         }
     }

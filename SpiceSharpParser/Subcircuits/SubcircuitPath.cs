@@ -164,7 +164,7 @@ namespace SpiceSharp.Parser.Subcircuits
         /// </summary>
         /// <param name="id">Identifier of the model</param>
         /// <returns></returns>
-        public T FindModel<T>(Entities obj, Identifier id) where T : class, Entity
+        public T FindModel<T>(Entities obj, Identifier id) where T : Entity
         {
             Entity co;
             T model = null;

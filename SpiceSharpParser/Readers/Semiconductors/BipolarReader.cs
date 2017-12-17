@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using SpiceSharp.Circuits;
 using SpiceSharp.Components;
+using SpiceSharp.Behaviors.BJT;
 
 namespace SpiceSharp.Parser.Readers
 {
@@ -44,8 +45,8 @@ namespace SpiceSharp.Parser.Readers
                     case WORD:
                         switch (parameters[i].image.ToLower())
                         {
-                            case "on": bjt.BJToff = false; break;
-                            case "off": bjt.BJToff = true; break;
+                            case "on": ((LoadBehavior)bjt.GetBehavior(typeof(LoadBehavior))).BJToff = false; break;
+                            case "off": ((LoadBehavior)bjt.GetBehavior(typeof(LoadBehavior))).BJToff = true; break;
                             default: throw new ParseException(parameters[i], "ON or OFF expected");
                         }
                         break;
@@ -53,17 +54,17 @@ namespace SpiceSharp.Parser.Readers
                     case ASSIGNMENT:
                         var at = parameters[i] as AssignmentToken;
                         if (at.Name.image.ToLower() == "ic")
-                            bjt.SetIC(netlist.ParseDoubleVector(at.Value));
+                            ((LoadBehavior)bjt.GetBehavior(typeof(LoadBehavior))).SetIC(netlist.ParseDoubleVector(at.Value));
                         else
                             throw new ParseException(parameters[i], "IC expected");
                         break;
 
                     case VALUE:
                     case EXPRESSION:
-                        if (!bjt.BJTarea.Given)
-                            bjt.BJTarea.Set(netlist.ParseDouble(parameters[i]));
-                        else if (!bjt.BJTtemp.Given)
-                            bjt.BJT_TEMP = netlist.ParseDouble(parameters[i]);
+                        if (!bjt.Ask("area").Given)
+                            bjt.Set("area", netlist.ParseDouble(parameters[i]));
+                        else if (!bjt.Ask("temp").Given) 
+                            bjt.Set("temp", netlist.ParseDouble(parameters[i]));
                         else
                             throw new ParseException(parameters[i], "Invalid parameter");
                         break;

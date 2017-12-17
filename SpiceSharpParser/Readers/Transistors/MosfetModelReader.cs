@@ -33,30 +33,34 @@ namespace SpiceSharp.Parser.Readers
             Levels.Add(1, (Identifier name, string type, string version) =>
             {
                 var m = new MOS1Model(name);
+                var temparatureBehavior = (SpiceSharp.Behaviors.MOS1.ModelTemperatureBehavior)m.GetBehavior(typeof(SpiceSharp.Behaviors.MOS1.ModelTemperatureBehavior));
                 switch (type)
                 {
-                    case "nmos": m.SetNMOS(true); break;
-                    case "pmos": m.SetPMOS(true); break;
+                    case "nmos": temparatureBehavior.SetNMOS(true); break;
+                    case "pmos": temparatureBehavior.SetPMOS(true); break;
                 }
                 return m;
             });
             Levels.Add(2, (Identifier name, string type, string version) =>
             {
+
                 var m = new MOS2Model(name);
+                var temparatureBehavior = (SpiceSharp.Behaviors.MOS2.ModelTemperatureBehavior)m.GetBehavior(typeof(SpiceSharp.Behaviors.MOS2.ModelTemperatureBehavior));
                 switch (type)
                 {
-                    case "nmos": m.SetNMOS(true); break;
-                    case "pmos": m.SetPMOS(true); break;
+                    case "nmos": temparatureBehavior.SetNMOS(true); break;
+                    case "pmos": temparatureBehavior.SetPMOS(true); break;
                 }
                 return m;
             });
             Levels.Add(3, (Identifier name, string type, string version) =>
             {
                 var m = new MOS3Model(name);
+                var temparatureBehavior = (SpiceSharp.Behaviors.MOS3.ModelTemperatureBehavior)m.GetBehavior(typeof(SpiceSharp.Behaviors.MOS3.ModelTemperatureBehavior));
                 switch (type)
                 {
-                    case "nmos": m.SetNMOS(true); break;
-                    case "pmos": m.SetPMOS(true); break;
+                    case "nmos": temparatureBehavior.SetNMOS(true); break;
+                    case "pmos": temparatureBehavior.SetPMOS(true); break;
                 }
                 return m;
             });

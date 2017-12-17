@@ -52,22 +52,22 @@ namespace SpiceSharp.Parser.Readers
                 if (i == 2 && parameters[i].image.ToLower() == "dc")
                 {
                     i++;
-                    isrc.ISRCdcValue.Set(netlist.ParseDouble(parameters[i]));
+                    isrc.Set("dc", netlist.ParseDouble(parameters[i]));
                 }
                 else if (i == 2 && ReaderExtension.IsValue(parameters[i]))
-                    isrc.ISRCdcValue.Set(netlist.ParseDouble(parameters[i]));
+                    isrc.Set("dc", netlist.ParseDouble(parameters[i]));
 
                 // AC specification
                 else if (parameters[i].image.ToLower() == "ac")
                 {
                     i++;
-                    isrc.ISRCacMag.Set(netlist.ParseDouble(parameters[i]));
+                    isrc.Set("acmag", netlist.ParseDouble(parameters[i]));
 
                     // Look forward for one more value
                     if (i + 1 < parameters.Count && ReaderExtension.IsValue(parameters[i + 1]))
                     {
                         i++;
-                        isrc.ISRCacPhase.Set(netlist.ParseDouble(parameters[i]));
+                        isrc.Set("acphase", netlist.ParseDouble(parameters[i]));
                     }
                 }
 
@@ -77,7 +77,9 @@ namespace SpiceSharp.Parser.Readers
                     // Find the reader
                     BracketToken bt = parameters[i] as BracketToken;
                     Statement st = new Statement(StatementType.Waveform, bt.Name, bt.Parameters);
-                    isrc.ISRCwaveform = (Waveform)netlist.Readers.Read(st, netlist);
+
+                    var loadBehavior = (SpiceSharp.Behaviors.ISRC.LoadBehavior)isrc.GetBehavior(typeof(SpiceSharp.Behaviors.ISRC.LoadBehavior));
+                    loadBehavior.ISRCwaveform = (Waveform)netlist.Readers.Read(st, netlist);
                 }
                 else
                     throw new ParseException(parameters[i], "Unrecognized parameter");
@@ -106,7 +108,7 @@ namespace SpiceSharp.Parser.Readers
             if (!ReaderExtension.IsName(parameters[2]))
                 throw new ParseException(parameters[2], "Component name expected");
             cccs.CCCScontName = new Identifier(parameters[2].image);
-            cccs.CCCScoeff.Set(netlist.ParseDouble(parameters[3]));
+            cccs.Set("gain", netlist.ParseDouble(parameters[3]));
             return cccs;
         }
 
@@ -124,7 +126,7 @@ namespace SpiceSharp.Parser.Readers
 
             if (parameters.Count < 5)
                 throw new ParseException(parameters[3], "Value expected", false);
-            vccs.VCCScoeff.Set(netlist.ParseDouble(parameters[4]));
+            vccs.Set("gain", netlist.ParseDouble(parameters[4]));
             return vccs;
         }
     }

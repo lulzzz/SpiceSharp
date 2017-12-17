@@ -246,7 +246,7 @@ namespace SpiceSharp.Parser.Readers
         /// <param name="netlist">Netlist</param>
         /// <param name="t">Token</param>
         /// <returns></returns>
-        public static T FindModel<T>(this Netlist netlist, Token t) where T : class, Entity
+        public static T FindModel<T>(this Netlist netlist, Token t) where T : Entity
         {
             switch (t.kind)
             {

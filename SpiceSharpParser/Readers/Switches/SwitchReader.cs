@@ -55,10 +55,10 @@ namespace SpiceSharp.Parser.Readers
                 switch (parameters[5].image.ToLower())
                 {
                     case "on":
-                        vsw.SetOn();
+                        vsw.Set("on", 1.0);
                         break;
                     case "off":
-                        vsw.SetOff();
+                        vsw.Set("off", 1.0);
                         break;
                     default:
                         throw new ParseException(parameters[5], "ON or OFF expected");
@@ -103,10 +103,10 @@ namespace SpiceSharp.Parser.Readers
                 switch (parameters[4].image.ToLower())
                 {
                     case "on":
-                        csw.SetOn();
+                        csw.Set("on", 1.0);
                         break;
                     case "off":
-                        csw.SetOff();
+                        csw.Set("off", 1.0);
                         break;
                     default:
                         throw new ParseException(parameters[4], "ON or OFF expected");

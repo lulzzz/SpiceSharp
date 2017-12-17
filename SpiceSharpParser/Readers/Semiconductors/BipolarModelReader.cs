@@ -25,10 +25,13 @@ namespace SpiceSharp.Parser.Readers
         protected override Entity GenerateModel(Identifier name, string type)
         {
             BJTModel model = new BJTModel(name);
+
+            var tempBehavior = (SpiceSharp.Behaviors.BJT.ModelTemperatureBehavior)model.GetBehavior(typeof(SpiceSharp.Behaviors.BJT.ModelTemperatureBehavior));
+
             if (type == "npn")
-                model.SetNPN(true);
+                tempBehavior.SetNPN(true);
             else if (type == "pnp")
-                model.SetPNP(true);
+                tempBehavior.SetPNP(true);
             return model;
         }
     }
