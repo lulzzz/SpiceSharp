@@ -25,12 +25,15 @@ namespace SpiceSharpTest.Components.RLC.Resistor
             simulation.OnExportSimulationData += (object sender, SimulationData data) =>
             {
                 var R1 = ckt.Objects["R_1"];
-                var current = ((SpiceSharp.Components.Resistor)R1).GetCurrent(ckt);
+                var resistor = ((SpiceSharp.Components.Resistor)R1);
+                var resistorLoad = (SpiceSharp.Behaviors.RES.LoadBehavior)(resistor.GetBehavior(typeof(SpiceSharp.Behaviors.RES.LoadBehavior)));
+
+                var current = resistorLoad.GetCurrent(ckt);
+
                 Assert.That.AreEqualWithTol(0.01, current, 0, 1e-8);
             };
 
-            simulation.Circuit = ckt;
-            simulation.SetupAndExecute();
+            simulation.Run(ckt);
         }
 
         [TestMethod]
@@ -47,12 +50,14 @@ namespace SpiceSharpTest.Components.RLC.Resistor
             simulation.OnExportSimulationData += (object sender, SimulationData data) =>
             {
                 var R1 = ckt.Objects["R_1"];
-                var current = ((SpiceSharp.Components.Resistor)R1).GetCurrent(ckt);
+                var resistor = ((SpiceSharp.Components.Resistor)R1);
+                var resistorLoad = (SpiceSharp.Behaviors.RES.LoadBehavior)(resistor.GetBehavior(typeof(SpiceSharp.Behaviors.RES.LoadBehavior)));
+
+                var current = resistorLoad.GetCurrent(ckt);
                 Assert.That.AreEqualWithTol(0.0, current, 0, 1e-8);
             };
 
-            simulation.Circuit = ckt;
-            simulation.SetupAndExecute();
+            simulation.Run(ckt);
         }
 
         [TestMethod]
@@ -73,8 +78,7 @@ namespace SpiceSharpTest.Components.RLC.Resistor
                 Assert.That.AreEqualWithTol(25, outVoltage, 0, 1e-8);
             };
 
-            simulation.Circuit = ckt;
-            simulation.SetupAndExecute();
+            simulation.Run(ckt);
         }
 
         [TestMethod]
@@ -92,15 +96,21 @@ namespace SpiceSharpTest.Components.RLC.Resistor
             {
                 var R1 = (SpiceSharp.Components.Resistor)ckt.Objects["R_1"];
                 var R2 = (SpiceSharp.Components.Resistor)ckt.Objects["R_2"];
-                var r1Current = R1.GetCurrent(ckt);
-                var r2Current = R2.GetCurrent(ckt);
+
+                var resistor1 = ((SpiceSharp.Components.Resistor)R1);
+                var resistor1Load = (SpiceSharp.Behaviors.RES.LoadBehavior)(resistor1.GetBehavior(typeof(SpiceSharp.Behaviors.RES.LoadBehavior)));
+
+                var resistor2 = ((SpiceSharp.Components.Resistor)R2);
+                var resistor2Load = (SpiceSharp.Behaviors.RES.LoadBehavior)(resistor2.GetBehavior(typeof(SpiceSharp.Behaviors.RES.LoadBehavior)));
+
+                var r1Current = resistor1Load.GetCurrent(ckt);
+                var r2Current = resistor2Load.GetCurrent(ckt);
 
                 Assert.That.AreEqualWithTol(50, r1Current, 0, 1e-8);
                 Assert.That.AreEqualWithTol(100, r2Current, 0, 1e-8);
             };
 
-            simulation.Circuit = ckt;
-            simulation.SetupAndExecute();
+            simulation.Run(ckt);
         }
 
         private static Circuit CreateVoltageDividerResistorDcCircuit(double dcVoltage, double resistance1, double resistance2)

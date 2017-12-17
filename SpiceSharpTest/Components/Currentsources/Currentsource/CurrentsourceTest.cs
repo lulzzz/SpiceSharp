@@ -27,14 +27,17 @@ namespace SpiceSharpTest.Components.Currentsources.Currentsource
             {
                 var R1 = data.Circuit.Objects["R_1"];
                 var I1 = data.Circuit.Objects["I_1"];
-                var currentOnResistor = ((Resistor)R1).GetCurrent(data.Circuit);
-                var volategeOnCurrentSource = ((SpiceSharp.Components.Currentsource)I1).GetV(data.Circuit);
+                var resistorLoad = (SpiceSharp.Behaviors.RES.LoadBehavior)((Resistor)R1).GetBehavior(typeof(SpiceSharp.Behaviors.RES.LoadBehavior));
+                var currentOnResistor = resistorLoad.GetCurrent(data.Circuit);
+
+                var currentsourceLoad = (SpiceSharp.Behaviors.ISRC.LoadBehavior)((SpiceSharp.Components.Currentsource)I1).GetBehavior(typeof(SpiceSharp.Behaviors.ISRC.LoadBehavior));
+                var volategeOnCurrentSource = currentsourceLoad.GetV(data.Circuit);
+
                 Assert.That.AreEqualWithTol(10, currentOnResistor, 0, 1e-8);
                 Assert.That.AreEqualWithTol(10000, volategeOnCurrentSource, 0, 1e-8);
             };
 
-            simulation.Circuit = ckt;
-            simulation.SetupAndExecute();
+            simulation.Run(ckt);
         }
 
         [TestMethod]
@@ -57,14 +60,16 @@ namespace SpiceSharpTest.Components.Currentsources.Currentsource
             {
                 var R1 = data.Circuit.Objects["R1"];
                 var I1 = data.Circuit.Objects["I_1"];
-                var currentOnResistor = ((Resistor)R1).GetCurrent(data.Circuit);
-                var volategeOnCurrentSource = ((SpiceSharp.Components.Currentsource)I1).GetV(data.Circuit);
+                var resistorLoad = (SpiceSharp.Behaviors.RES.LoadBehavior)((Resistor)R1).GetBehavior(typeof(SpiceSharp.Behaviors.RES.LoadBehavior));
+                var currentOnResistor = resistorLoad.GetCurrent(data.Circuit);
+                var currentsourceLoad = (SpiceSharp.Behaviors.ISRC.LoadBehavior)((SpiceSharp.Components.Currentsource)I1).GetBehavior(typeof(SpiceSharp.Behaviors.ISRC.LoadBehavior));
+
+                var volategeOnCurrentSource = currentsourceLoad.GetV(data.Circuit);
                 Assert.That.AreEqualWithTol(currentInAmp, currentOnResistor, 0, 1e-8);
                 Assert.That.AreEqualWithTol(currentInAmp * resistanceInOhms * resistorCount, volategeOnCurrentSource, 0, 1e-6);
             };
 
-            simulation.Circuit = ckt;
-            simulation.SetupAndExecute();
+            simulation.Run(ckt);
         }
 
         private static Circuit CreateResistorsInSeriesCircuit(int count, double current, double resistance)

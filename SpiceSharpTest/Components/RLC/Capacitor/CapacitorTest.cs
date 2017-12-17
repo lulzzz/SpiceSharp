@@ -50,7 +50,6 @@ namespace SpiceSharpTest.Components.RLC.Capacitor
 
             double maxVoltage = 0;
             Transient trans = new Transient("T", 0.001, 5 * tau);
-            trans.Circuit = ckt; //TODO: refactor this ..
             ckt.Simulation = trans; //TODO: refactor this ..
             // trans.CurrentConfig.UseIC = true;
             ckt.Nodes.IC.Add("OUT", 0.0);
@@ -62,7 +61,7 @@ namespace SpiceSharpTest.Components.RLC.Capacitor
                     maxVoltage = outVoltage;
                 }
              };
-            trans.SetupAndExecute();
+            trans.Run(ckt);
 
             Assert.That.AreEqualWithTol(9.93, maxVoltage, 0, 0.01);
 

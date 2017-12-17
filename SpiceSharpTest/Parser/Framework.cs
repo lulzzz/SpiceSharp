@@ -48,10 +48,6 @@ namespace SpiceSharpTest.Parser
         /// <param name="n"></param>
         protected void Initialize(Netlist n)
         {
-            n.Circuit.Setup();
-            var temperaturebehaviours = SpiceSharp.Behaviors.Behaviors.CreateBehaviors<SpiceSharp.Behaviors.TemperatureBehavior>(n.Circuit);
-            foreach (var behaviour in temperaturebehaviours)
-                behaviour.Temperature(n.Circuit);
         }
 
         /// <summary>
@@ -63,7 +59,7 @@ namespace SpiceSharpTest.Parser
         /// <param name="values">The parameter values</param>
         /// <param name="nodes">The nodes (optional)</param>
         /// <returns></returns>
-        protected T Test<T>(Netlist n, Identifier name, string[] names = null, double[] values = null, Identifier[] nodes = null)
+        protected T Test<T>(Netlist n, Identifier name, string[] names = null, double[] values = null, Identifier[] nodes = null) where T: Entity
         {
             var obj = n.Circuit.Objects[name];
             Assert.AreEqual(typeof(T), obj.GetType());
