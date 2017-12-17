@@ -2,6 +2,7 @@
 using SpiceSharp.Behaviors;
 using SpiceSharp.Diagnostics;
 using SpiceSharp.Components.Transistors;
+using SpiceSharp.Circuits;
 
 namespace SpiceSharp.Components.ComponentBehaviors
 {
@@ -10,6 +11,15 @@ namespace SpiceSharp.Components.ComponentBehaviors
     /// </summary>
     public class BSIM3v30ModelTemperatureBehavior : TemperatureBehavior
     {
+        private BSIM3v30Model model;
+
+        public override void Setup(Entity component, Circuit ckt)
+        {
+            //TODO: improve it after finish of the refactor
+            base.Setup(component, ckt);
+            model = (BSIM3v30Model)component;
+        }
+
         /// <summary>
         /// Execute behaviour
         /// </summary>
@@ -17,7 +27,6 @@ namespace SpiceSharp.Components.ComponentBehaviors
         public override void Temperature(Circuit ckt)
         {
             double Temp, Tnom, Eg0, Eg, delTemp, T0, T1;
-            var model = ComponentTyped<BSIM3v30Model>();
 
             Temp = ckt.State.Temperature;
             if (model.BSIM3bulkJctPotential < 0.1)

@@ -4,6 +4,7 @@ using SpiceSharp.Circuits;
 using SpiceSharp.Diagnostics;
 using SpiceSharp.Parameters;
 using SpiceSharp.Components.Transistors;
+using SpiceSharp.Components.ComponentBehaviors;
 
 namespace SpiceSharp.Components
 {
@@ -13,17 +14,6 @@ namespace SpiceSharp.Components
     [SpicePins("Drain", "Gate", "Source", "Bulk"), ConnectedPins(0, 2, 3)]
     public class BSIM2 : Component
     {
-        /// <summary>
-        /// Register default behaviours
-        /// </summary>
-        static BSIM2()
-        {
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM2), typeof(ComponentBehaviors.BSIM2TemperatureBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM2), typeof(ComponentBehaviors.BSIM2LoadBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM2), typeof(ComponentBehaviors.BSIM2AcBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM2), typeof(ComponentBehaviors.BSIM2TruncateBehavior));
-        }
-
         /// <summary>
         /// Gets or sets the device model
         /// </summary>
@@ -150,6 +140,10 @@ namespace SpiceSharp.Components
         /// <param name="name">The name of the device</param>
         public BSIM2(Identifier name) : base(name, B2pinCount)
         {
+            RegisterBehavior(new BSIM2TemperatureBehavior());
+            RegisterBehavior(new BSIM2LoadBehavior());
+            RegisterBehavior(new BSIM2AcBehavior());
+            RegisterBehavior(new BSIM2TruncateBehavior());
         }
 
         /// <summary>

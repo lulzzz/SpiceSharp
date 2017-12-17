@@ -1,4 +1,5 @@
 ﻿using SpiceSharp.Circuits;
+using SpiceSharp.Components.ComponentBehaviors;
 using SpiceSharp.Parameters;
 
 namespace SpiceSharp.Components
@@ -8,14 +9,6 @@ namespace SpiceSharp.Components
     /// </summary>
     public class BSIM1Model : Model
     {
-        /// <summary>
-        /// Register default behaviours
-        /// </summary>
-        static BSIM1Model()
-        {
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM1Model), typeof(ComponentBehaviors.BSIM1ModelTemperatureBehavior));
-        }
-
         /// <summary>
         /// Parameters
         /// </summary>
@@ -204,6 +197,7 @@ namespace SpiceSharp.Components
         /// <param name="name">The name of the device</param>
         public BSIM1Model(Identifier name) : base(name)
         {
+            RegisterBehavior(new BSIM1ModelTemperatureBehavior());
         }
     }
 }

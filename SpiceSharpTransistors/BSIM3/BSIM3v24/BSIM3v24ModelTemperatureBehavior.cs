@@ -4,6 +4,7 @@ using System.Linq;
 using SpiceSharp.Diagnostics;
 using SpiceSharp.Behaviors;
 using SpiceSharp.Components.Transistors;
+using SpiceSharp.Circuits;
 
 namespace SpiceSharp.Components.ComponentBehaviors
 {
@@ -12,14 +13,21 @@ namespace SpiceSharp.Components.ComponentBehaviors
     /// </summary>
     public class BSIM3v24ModelTemperatureBehavior : TemperatureBehavior
     {
+        private BSIM3v24Model model;
+
+        public override void Setup(Entity component, Circuit ckt)
+        {
+            //TODO: improve it after finish of the refactor
+            base.Setup(component, ckt);
+            model = (BSIM3v24Model)component;
+        }
+
         /// <summary>
         /// Execute the behaviour
         /// </summary>
         /// <param name="ckt">Circuit</param>
         public override void Temperature(Circuit ckt)
         {
-
-            var model = ComponentTyped<BSIM3v24Model>();
             double Temp, Tnom, Eg0, Eg, delTemp, T0, T1;
 
             Temp = ckt.State.Temperature;

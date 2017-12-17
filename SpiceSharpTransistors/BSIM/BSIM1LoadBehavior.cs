@@ -11,6 +11,8 @@ namespace SpiceSharp.Components.ComponentBehaviors
     /// </summary>
     public class BSIM1LoadBehavior : LoadBehavior
     {
+        private BSIM1 bsim1;
+
         /// <summary>
         /// Setup the behaviour
         /// </summary>
@@ -19,7 +21,8 @@ namespace SpiceSharp.Components.ComponentBehaviors
         public override void Setup(Entity component, Circuit ckt)
         {
             base.Setup(component, ckt);
-            var bsim1 = ComponentTyped<BSIM1>();
+            bsim1 = (BSIM1)component;
+
             bsim1.B1vdsat = 0;
             bsim1.B1von = 0;
         }
@@ -30,7 +33,6 @@ namespace SpiceSharp.Components.ComponentBehaviors
         /// <param name="ckt">Circuit</param>
         public override void Load(Circuit ckt)
         {
-            var bsim1 = ComponentTyped<BSIM1>();
             var model = bsim1.Model as BSIM1Model;
             var state = ckt.State;
             var rstate = state;

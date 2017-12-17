@@ -3,6 +3,7 @@ using SpiceSharp.Behaviors;
 using SpiceSharp.Diagnostics;
 using SpiceSharp.Components.Transistors;
 using static SpiceSharp.Components.Transistors.BSIM4v80Helpers;
+using SpiceSharp.Circuits;
 
 namespace SpiceSharp.Components.ComponentBehaviors
 {
@@ -11,13 +12,21 @@ namespace SpiceSharp.Components.ComponentBehaviors
     /// </summary>
     public class BSIM4v80TemperatureBehavior : TemperatureBehavior
     {
+        private BSIM4v80 bsim4;
+
+        public override void Setup(Entity component, Circuit ckt)
+        {
+            //TODO: improve it after finish of the refactor
+            base.Setup(component, ckt);
+            bsim4 = (BSIM4v80)component;
+        }
+
         /// <summary>
         /// Execute behaviour
         /// </summary>
         /// <param name="ckt">Circuit</param>
         public override void Temperature(Circuit ckt)
         {
-            var bsim4 = ComponentTyped<BSIM4v80>();
             var model = bsim4.Model as BSIM4v80Model;
             double Ldrn, Wdrn, Lnew = 0, Wnew, T0, T1, tmp1, tmp2, T2, T3, Inv_L, Inv_W, Inv_LW,
                 PowWeffWr, T10, T4, T5, tmp, T8, T9, wlod, W_tmp, Inv_saref, Inv_sbref, Theta0, tmp3, n0, Inv_sa,

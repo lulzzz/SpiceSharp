@@ -1,4 +1,5 @@
 ﻿using SpiceSharp.Behaviors;
+using SpiceSharp.Circuits;
 
 namespace SpiceSharp.Components.ComponentBehaviors
 {
@@ -7,14 +8,25 @@ namespace SpiceSharp.Components.ComponentBehaviors
     /// </summary>
     public class BSIM1ModelTemperatureBehavior : TemperatureBehavior
     {
+        private BSIM1Model model;
+
+        /// <summary>
+        /// Setup the behaviour
+        /// </summary>
+        /// <param name="component">Component</param>
+        /// <param name="ckt">Circuit</param>
+        public override void Setup(Entity component, Circuit ckt)
+        {
+            base.Setup(component, ckt);
+            model = (BSIM1Model)component;
+        }
+
         /// <summary>
         /// Execute the behaviour
         /// </summary>
         /// <param name="ckt">Circuit</param>
         public override void Temperature(Circuit ckt)
         {
-            var model = ComponentTyped<BSIM1Model>();
-
             /* Default value Processing for B1 MOSFET Models */
             /* Some Limiting for Model Parameters */
             if (model.B1bulkJctPotential < 0.1)

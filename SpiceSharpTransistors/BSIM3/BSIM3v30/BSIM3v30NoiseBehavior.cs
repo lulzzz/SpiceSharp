@@ -17,6 +17,7 @@ namespace SpiceSharp.Components.ComponentBehaviors
         private const int BSIM3RSNOIZ = 1;
         private const int BSIM3IDNOIZ = 2;
         private const int BSIM3FLNOIZ = 3;
+        private BSIM3v30 bsim3;
 
         /// <summary>
         /// Noise generators
@@ -36,7 +37,7 @@ namespace SpiceSharp.Components.ComponentBehaviors
         public override void Setup(Entity component, Circuit ckt)
         {
             base.Setup(component, ckt);
-            var bsim3 = ComponentTyped<BSIM3v30>();
+            bsim3 = (BSIM3v30)component;
             BSIM3noise.Setup(ckt,
                 bsim3.BSIM3dNode,
                 bsim3.BSIM3gNode,
@@ -53,7 +54,7 @@ namespace SpiceSharp.Components.ComponentBehaviors
         /// <param name="ckt"></param>
         public override void Noise(Circuit ckt)
         {
-            var here = ComponentTyped<BSIM3v30>();
+            var here = bsim3;
             var model = here.Model as BSIM3v30Model;
             var state = ckt.State;
             var noise = state.Noise;

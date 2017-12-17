@@ -13,14 +13,6 @@ namespace SpiceSharp.Components
     public class BSIM4v80Model : Model
     {
         /// <summary>
-        /// Register default behaviours
-        /// </summary>
-        static BSIM4v80Model()
-        {
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM4v80Model), typeof(ComponentBehaviors.BSIM4v80ModelTemperatureBehavior));
-        }
-
-        /// <summary>
         /// Size-dependent parameters
         /// </summary>
         public Dictionary<Tuple<double, double, double>, BSIM4SizeDependParam> Sizes { get; } = new Dictionary<Tuple<double, double, double>, BSIM4SizeDependParam>();
@@ -1969,6 +1961,7 @@ namespace SpiceSharp.Components
         /// <param name="name">The name of the device</param>
         public BSIM4v80Model(Identifier name) : base(name)
         {
+            RegisterBehavior(new SpiceSharp.Components.ComponentBehaviors.BSIM4v80ModelTemperatureBehavior());
         }
 
         /// <summary>

@@ -41,6 +41,7 @@ namespace SpiceSharp.Components.ComponentBehaviors
         private const int BSIM4IGDNOIZ = 11;
         private const int BSIM4IGBNOIZ = 12;
         private const int BSIM4CORLNOIZ = 13;
+        private BSIM4v80 bsim4;
 
 
         /// <summary>
@@ -71,7 +72,7 @@ namespace SpiceSharp.Components.ComponentBehaviors
         public override void Setup(Entity component, Circuit ckt)
         {
             base.Setup(component, ckt);
-            var bsim4 = ComponentTyped<BSIM4v80>();
+            bsim4 = (BSIM4v80)component;
 
             BSIM4noise.Setup(ckt,
                 bsim4.BSIM4dNode,
@@ -94,7 +95,7 @@ namespace SpiceSharp.Components.ComponentBehaviors
         /// <param name="ckt">Circuit</param>
         public override void Noise(Circuit ckt)
         {
-            var here = ComponentTyped<BSIM4v80>();
+            var here = bsim4;
             var model = here.Model as BSIM4v80Model;
             var state = ckt.State;
             var noise = state.Noise;

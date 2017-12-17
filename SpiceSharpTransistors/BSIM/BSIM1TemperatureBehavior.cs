@@ -1,6 +1,7 @@
 ﻿using System;
 using SpiceSharp.Behaviors;
 using SpiceSharp.Diagnostics;
+using SpiceSharp.Circuits;
 
 namespace SpiceSharp.Components.ComponentBehaviors
 {
@@ -9,13 +10,25 @@ namespace SpiceSharp.Components.ComponentBehaviors
     /// </summary>
     public class BSIM1TemperatureBehavior : TemperatureBehavior
     {
+        private BSIM1 bsim1;
+
+        /// <summary>
+        /// Setup the behaviour
+        /// </summary>
+        /// <param name="component">Component</param>
+        /// <param name="ckt">Circuit</param>
+        public override void Setup(Entity component, Circuit ckt)
+        {
+            base.Setup(component, ckt);
+            bsim1 = (BSIM1)component;
+        }
+
         /// <summary>
         /// Execute the behaviour
         /// </summary>
         /// <param name="ckt"></param>
         public override void Temperature(Circuit ckt)
         {
-            var bsim1 = ComponentTyped<BSIM1>();
             var model = bsim1.Model as BSIM1Model;
             double EffChanLength;
             double EffChanWidth;

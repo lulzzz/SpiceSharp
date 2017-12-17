@@ -4,6 +4,7 @@ using SpiceSharp.Circuits;
 using SpiceSharp.Diagnostics;
 using SpiceSharp.Parameters;
 using SpiceSharp.Components.Transistors;
+using SpiceSharp.Components.ComponentBehaviors;
 
 namespace SpiceSharp.Components
 {
@@ -11,15 +12,7 @@ namespace SpiceSharp.Components
     /// The BSIM3v30 Model
     /// </summary>
     public class BSIM3v30Model : Model
-    {
-        /// <summary>
-        /// Register default behaviours
-        /// </summary>
-        static BSIM3v30Model()
-        {
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM3v30Model), typeof(ComponentBehaviors.BSIM3v30ModelTemperatureBehavior));
-        }
-
+    {       
         /// <summary>
         /// Allow caching of size-dependent parameters
         /// </summary>
@@ -959,6 +952,7 @@ namespace SpiceSharp.Components
         /// <param name="name">The name of the device</param>
         public BSIM3v30Model(Identifier name) : base(name)
         {
+            RegisterBehavior(new BSIM3v30ModelTemperatureBehavior());
         }
 
         /// <summary>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using SpiceSharp.Circuits;
 using SpiceSharp.Parameters;
 using SpiceSharp.Components.Transistors;
+using SpiceSharp.Components.ComponentBehaviors;
 
 namespace SpiceSharp.Components
 {
@@ -11,14 +12,6 @@ namespace SpiceSharp.Components
     /// </summary>
     public class BSIM2Model : Model
     {
-        /// <summary>
-        /// Register default behaviours
-        /// </summary>
-        static BSIM2Model()
-        {
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM2Model), typeof(ComponentBehaviors.BSIM2ModelTemperatureBehavior));
-        }
-
         /// <summary>
         /// Parameters
         /// </summary>
@@ -318,6 +311,7 @@ namespace SpiceSharp.Components
         /// <param name="name">The name of the device</param>
         public BSIM2Model(Identifier name) : base(name)
         {
+            RegisterBehavior(new BSIM2ModelTemperatureBehavior());
         }
     }
 }

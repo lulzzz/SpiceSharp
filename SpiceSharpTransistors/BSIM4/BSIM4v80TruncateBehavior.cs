@@ -1,4 +1,5 @@
 ﻿using SpiceSharp.Behaviors;
+using SpiceSharp.Circuits;
 
 namespace SpiceSharp.Components.ComponentBehaviors
 {
@@ -7,6 +8,15 @@ namespace SpiceSharp.Components.ComponentBehaviors
     /// </summary>
     public class BSIM4v80TruncateBehavior : TruncateBehavior
     {
+        private BSIM4v80 bsim4;
+
+        public override void Setup(Entity component, Circuit ckt)
+        {
+            //TODO: improve it after finish of the refactor
+            base.Setup(component, ckt);
+            bsim4 = (BSIM4v80)component;
+        }
+
         /// <summary>
         /// Truncate the timestep
         /// </summary>
@@ -14,7 +24,6 @@ namespace SpiceSharp.Components.ComponentBehaviors
         /// <param name="timestep">Timestep</param>
         public override void Truncate(Circuit ckt, ref double timestep)
         {
-            var bsim4 = ComponentTyped<BSIM4v80>();
             var method = ckt.Method;
             method.Terr(bsim4.BSIM4states + BSIM4v80.BSIM4qb, ckt, ref timestep);
             method.Terr(bsim4.BSIM4states + BSIM4v80.BSIM4qg, ckt, ref timestep);

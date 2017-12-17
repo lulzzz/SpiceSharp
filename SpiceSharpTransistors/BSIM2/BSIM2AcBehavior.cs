@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using SpiceSharp.Behaviors;
+using SpiceSharp.Circuits;
 
 namespace SpiceSharp.Components.ComponentBehaviors
 {
@@ -8,13 +9,21 @@ namespace SpiceSharp.Components.ComponentBehaviors
     /// </summary>
     public class BSIM2AcBehavior : AcBehavior
     {
+        private BSIM2 bsim2;
+
+        public override void Setup(Entity component, Circuit ckt)
+        {
+            //TODO: improve it after finish of the refactor
+            base.Setup(component, ckt);
+            bsim2 = (BSIM2)component;
+        }
+
         /// <summary>
         /// Execute the behaviour
         /// </summary>
         /// <param name="ckt">Circuit</param>
         public override void Load(Circuit ckt)
         {
-            var bsim2 = ComponentTyped<BSIM2>();
             var model = bsim2.Model as BSIM2Model;
             var state = ckt.State;
             var cstate = state;

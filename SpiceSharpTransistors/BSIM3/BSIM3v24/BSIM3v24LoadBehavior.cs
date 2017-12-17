@@ -10,13 +10,21 @@ namespace SpiceSharp.Components.ComponentBehaviors
     /// </summary>
     public class BSIM3v24LoadBehavior : LoadBehavior
     {
+        private BSIM3v24 bsim3;
+
+        public override void Setup(Entity component, Circuit ckt)
+        {
+            //TODO: improve it after finish of the refactor
+            base.Setup(component, ckt);
+            bsim3 = (BSIM3v24)component;
+        }
+
         /// <summary>
         /// Execute the behaviour
         /// </summary>
         /// <param name="ckt">Circuit</param>
         public override void Load(Circuit ckt)
         {
-            var bsim3 = ComponentTyped<BSIM3v24>();
             var model = bsim3.Model as BSIM3v24Model;
             var state = ckt.State;
             var rstate = state;

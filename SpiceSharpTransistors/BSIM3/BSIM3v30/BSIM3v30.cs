@@ -2,6 +2,7 @@
 using SpiceSharp.Diagnostics;
 using SpiceSharp.Parameters;
 using SpiceSharp.Components.Transistors;
+using SpiceSharp.Components.ComponentBehaviors;
 
 namespace SpiceSharp.Components
 {
@@ -11,18 +12,6 @@ namespace SpiceSharp.Components
     [SpicePins("Drain", "Gate", "Source", "Bulk"), ConnectedPins(0, 2, 3)]
     public class BSIM3v30 : Component
     {
-        /// <summary>
-        /// Register default behaviours
-        /// </summary>
-        static BSIM3v30()
-        {
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM3v30), typeof(ComponentBehaviors.BSIM3v30TemperatureBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM3v30), typeof(ComponentBehaviors.BSIM3v30LoadBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM3v30), typeof(ComponentBehaviors.BSIM3v30AcBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM3v30), typeof(ComponentBehaviors.BSIM3v30NoiseBehavior));
-            Behaviors.Behaviors.RegisterBehavior(typeof(BSIM3v30), typeof(ComponentBehaviors.BSIM3v30TruncateBehavior));
-        }
-
         /// <summary>
         /// Gets or sets the device model
         /// </summary>
@@ -187,6 +176,11 @@ namespace SpiceSharp.Components
         /// <param name="name">The name of the device</param>
         public BSIM3v30(Identifier name) : base(name, BSIM3pinCount)
         {
+            RegisterBehavior(new BSIM3v30TemperatureBehavior());
+            RegisterBehavior(new BSIM3v30LoadBehavior());
+            RegisterBehavior(new BSIM3v30AcBehavior());
+            RegisterBehavior(new BSIM3v30NoiseBehavior());
+            RegisterBehavior(new BSIM3v30TruncateBehavior());
         }
 
         /// <summary>
