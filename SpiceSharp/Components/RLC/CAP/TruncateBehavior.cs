@@ -1,17 +1,17 @@
-﻿using SpiceSharp.Components;
+﻿using SpiceSharp.Simulations;
 using SpiceSharp.Circuits;
 
 namespace SpiceSharp.Behaviors.CAP
 {
     /// <summary>
-    /// Truncate behavior for capacitors
+    /// Truncate behavior for a <see cref="Components.Capacitor"/>
     /// </summary>
     public class TruncateBehavior : Behaviors.TruncateBehavior
     {
         /// <summary>
         /// Necessary behaviors
         /// </summary>
-        private LoadBehavior load;
+        private TransientBehavior tran;
 
         /// <summary>
         /// Setup the behavior
@@ -21,17 +21,17 @@ namespace SpiceSharp.Behaviors.CAP
         public override void Setup(Entity component, Circuit ckt)
         {
             // Get behaviors
-            load = GetBehavior<LoadBehavior>(component);
+            tran = GetBehavior<TransientBehavior>(component);
         }
 
         /// <summary>
         /// Truncate the timestep
         /// </summary>
-        /// <param name="ckt">Circuit</param>
+        /// <param name="sim">Simulation</param>
         /// <param name="timestep">Timestep</param>
-        public override void Truncate(Circuit ckt, ref double timestep)
+        public override void Truncate(TimeSimulation sim, ref double timestep)
         {
-            ckt.Method.Terr(load.CAPstate + LoadBehavior.CAPqcap, ckt, ref timestep);
+            sim.Circuit.Method.Terr(tran.CAPstate + TransientBehavior.CAPqcap, sim, ref timestep);
         }
     }
 }

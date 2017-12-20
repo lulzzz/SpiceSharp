@@ -1,4 +1,5 @@
 ﻿using SpiceSharp.Circuits;
+using SpiceSharp.Simulations;
 
 namespace SpiceSharp.Behaviors.IND
 {
@@ -10,7 +11,7 @@ namespace SpiceSharp.Behaviors.IND
         /// <summary>
         /// Necessary behaviors
         /// </summary>
-        private LoadBehavior load;
+        private TransientBehavior load;
 
         /// <summary>
         /// Setup the behavior
@@ -21,17 +22,17 @@ namespace SpiceSharp.Behaviors.IND
         public override void Setup(Entity component, Circuit ckt)
         {
             // Get behaviors
-            load = GetBehavior<LoadBehavior>(component);
+            load = GetBehavior<TransientBehavior>(component);
         }
 
         /// <summary>
         /// Truncate the timestep
         /// </summary>
-        /// <param name="ckt">Circuit</param>
+        /// <param name="sim">Simulation</param>
         /// <param name="timestep">Timestep</param>
-        public override void Truncate(Circuit ckt, ref double timestep)
+        public override void Truncate(TimeSimulation sim, ref double timestep)
         {
-            ckt.Method.Terr(load.INDstate + LoadBehavior.INDflux, ckt, ref timestep);
+            sim.Circuit.Method.Terr(load.INDstate + TransientBehavior.INDflux, sim, ref timestep);
         }
     }
 }
