@@ -1,5 +1,6 @@
 ﻿using SpiceSharp.Behaviors;
 using SpiceSharp.Circuits;
+using SpiceSharp.Simulations;
 
 namespace SpiceSharp.Components.ComponentBehaviors
 {
@@ -24,14 +25,14 @@ namespace SpiceSharp.Components.ComponentBehaviors
         /// <summary>
         /// Truncate
         /// </summary>
-        /// <param name="ckt">Circuit</param>
-        /// <param name="timeStep">Timestep</param>
-        public override void Truncate(Circuit ckt, ref double timeStep)
+        /// <param name="sim">Simulation</param>
+        /// <param name="timestep">Timestep</param>
+        public override void Truncate(TimeSimulation sim, ref double timestep)
         {
-            var method = ckt.Method;
-            method.Terr(bsim1.B1states + BSIM1.B1qb, ckt, ref timeStep);
-            method.Terr(bsim1.B1states + BSIM1.B1qg, ckt, ref timeStep);
-            method.Terr(bsim1.B1states + BSIM1.B1qd, ckt, ref timeStep);
+            var method = sim.Method;
+            method.Terr(bsim1.B1states + BSIM1.B1qb, sim, ref timestep);
+            method.Terr(bsim1.B1states + BSIM1.B1qg, sim, ref timestep);
+            method.Terr(bsim1.B1states + BSIM1.B1qd, sim, ref timestep);
         }
     }
 }

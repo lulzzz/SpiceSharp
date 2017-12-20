@@ -1,5 +1,6 @@
 ﻿using SpiceSharp.Behaviors;
 using SpiceSharp.Circuits;
+using SpiceSharp.Simulations;
 
 namespace SpiceSharp.Components.ComponentBehaviors
 {
@@ -20,23 +21,23 @@ namespace SpiceSharp.Components.ComponentBehaviors
         /// <summary>
         /// Truncate the timestep
         /// </summary>
-        /// <param name="ckt">Circuit</param>
+        /// <param name="sim">Simulation</param>
         /// <param name="timestep">Timestep</param>
-        public override void Truncate(Circuit ckt, ref double timestep)
+        public override void Truncate(TimeSimulation sim, ref double timestep)
         {
-            var method = ckt.Method;
-            method.Terr(bsim4.BSIM4states + BSIM4v80.BSIM4qb, ckt, ref timestep);
-            method.Terr(bsim4.BSIM4states + BSIM4v80.BSIM4qg, ckt, ref timestep);
-            method.Terr(bsim4.BSIM4states + BSIM4v80.BSIM4qd, ckt, ref timestep);
+            var method = sim.Method;
+            method.Terr(bsim4.BSIM4states + BSIM4v80.BSIM4qb, sim, ref timestep);
+            method.Terr(bsim4.BSIM4states + BSIM4v80.BSIM4qg, sim, ref timestep);
+            method.Terr(bsim4.BSIM4states + BSIM4v80.BSIM4qd, sim, ref timestep);
             if (bsim4.BSIM4trnqsMod != 0)
-                method.Terr(bsim4.BSIM4states + BSIM4v80.BSIM4qcdump, ckt, ref timestep);
+                method.Terr(bsim4.BSIM4states + BSIM4v80.BSIM4qcdump, sim, ref timestep);
             if (bsim4.BSIM4rbodyMod != 0)
             {
-                method.Terr(bsim4.BSIM4states + BSIM4v80.BSIM4qbs, ckt, ref timestep);
-                method.Terr(bsim4.BSIM4states + BSIM4v80.BSIM4qbd, ckt, ref timestep);
+                method.Terr(bsim4.BSIM4states + BSIM4v80.BSIM4qbs, sim, ref timestep);
+                method.Terr(bsim4.BSIM4states + BSIM4v80.BSIM4qbd, sim, ref timestep);
             }
             if (bsim4.BSIM4rgateMod == 3)
-                method.Terr(bsim4.BSIM4states + BSIM4v80.BSIM4qgmid, ckt, ref timestep);
+                method.Terr(bsim4.BSIM4states + BSIM4v80.BSIM4qgmid, sim, ref timestep);
         }
     }
 }
