@@ -10,16 +10,12 @@ namespace SpiceSharp.Behaviors.RES
     /// </summary>
     public class LoadBehavior : Behaviors.LoadBehavior
     {
-        /// <summary>
-        /// Parameters
-        /// </summary>
-        [SpiceName("resistance"), SpiceInfo("Resistance", IsPrincipal = true)]
-        public Parameter RESresist { get; } = new Parameter();
         [SpiceName("i"), SpiceInfo("Current")]
         public double GetCurrent(Circuit ckt)
         {
             return (ckt.State.Solution[RESposNode] - ckt.State.Solution[RESnegNode]) * RESconduct;
         }
+
         [SpiceName("p"), SpiceInfo("Power")]
         public double GetPower(Circuit ckt)
         {
@@ -54,15 +50,6 @@ namespace SpiceSharp.Behaviors.RES
         }
 
         /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="res">Resistance</param>
-        public LoadBehavior(double res)
-        {
-            RESresist.Set(res);
-        }
-
-        /// <summary>
         /// Setup the behavior
         /// </summary>
         /// <param name="component">Component</param>
@@ -73,18 +60,18 @@ namespace SpiceSharp.Behaviors.RES
             var res = component as Resistor;
 
             // If the resistance is not given, get the default from the model
-            if (!RESresist.Given)
+            if (!res.RESresist.Given)
             {
                 var temp = GetBehavior<TemperatureBehavior>(component);
-                RESresist.Value = temp.RESresist;
+                res.RESresist.Value = temp.RESresist;
                 RESconduct = temp.RESconduct;
             }
             else
             {
-                if (RESresist.Value == 0.0)
+                if (res.RESresist.Value == 0.0)
                     RESconduct = 1e12;
                 else
-                    RESconduct = 1.0 / RESresist.Value;
+                    RESconduct = 1.0 / res.RESresist.Value;
             }
 
             // Nodes
@@ -102,7 +89,6 @@ namespace SpiceSharp.Behaviors.RES
         /// <summary>
         /// Unsetup
         /// </summary>
-        /// <param name="ckt">The circuit</param>
         public override void Unsetup()
         {
             // Remove references

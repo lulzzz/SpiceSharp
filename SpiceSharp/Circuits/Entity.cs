@@ -51,6 +51,8 @@ namespace SpiceSharp.Circuits
         /// </summary>
         protected virtual void CollectNamedParameters()
         {
+            CollectNamedParameters(this);
+
             foreach (var behavior in Behaviors.Values)
                 CollectNamedParameters(behavior);
             CollectedParameters = true;

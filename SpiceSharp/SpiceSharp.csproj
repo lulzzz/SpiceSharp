@@ -56,7 +56,6 @@
     <Compile Include="Components\Currentsources\VCCS\LoadBehavior.cs" />
     <Compile Include="Components\RLC\CAP\AcBehavior.cs" />
     <Compile Include="Components\RLC\CAP\AcceptBehavior.cs" />
-    <Compile Include="Components\RLC\CAP\ModelTemperatureBehavior.cs" />
     <Compile Include="Components\RLC\CAP\TemperatureBehavior.cs" />
     <Compile Include="Components\RLC\CAP\TransientBehavior.cs" />
     <Compile Include="Components\RLC\CAP\TruncateBehavior.cs" />
@@ -67,7 +66,6 @@
     <Compile Include="Components\RLC\IND\TruncateBehavior.cs" />
     <Compile Include="Components\RLC\MUT\AcBehavior.cs" />
     <Compile Include="Components\RLC\MUT\LoadBehavior.cs" />
-    <Compile Include="Components\RLC\RES\ModelTemperatureBehavior.cs" />
     <Compile Include="Components\RLC\RES\TemperatureBehavior.cs" />
     <Compile Include="Components\Semiconductors\BJT\AcBehavior.cs" />
     <Compile Include="Components\Semiconductors\BJT\LoadBehavior.cs" />

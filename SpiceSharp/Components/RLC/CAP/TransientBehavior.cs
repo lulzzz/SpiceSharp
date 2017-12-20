@@ -11,13 +11,6 @@ namespace SpiceSharp.Behaviors.CAP
     /// </summary>
     public class TransientBehavior : Behaviors.TransientBehavior
     {
-        /// <summary>
-        /// Parameters
-        /// </summary>
-        [SpiceName("capacitance"), SpiceInfo("Device capacitance", IsPrincipal = true)]
-        public Parameter CAPcapac { get; } = new Parameter();
-        [SpiceName("ic"), SpiceInfo("Initial capacitor voltage", Interesting = false)]
-        public Parameter CAPinitCond { get; } = new Parameter();
         [SpiceName("i"), SpiceInfo("Device current")]
         public double GetCurrent(Circuit ckt) => ckt.State.States[0][CAPstate + CAPccap];
         [SpiceName("p"), SpiceInfo("Instantaneous device power")]
@@ -27,6 +20,8 @@ namespace SpiceSharp.Behaviors.CAP
         /// Nodes and states
         /// </summary>
         public int CAPstate { get; private set; }
+
+        private Capacitor cap;
         private int CAPposNode, CAPnegNode;
         private MatrixElement CAPposPosptr;
         private MatrixElement CAPnegNegptr;
@@ -47,34 +42,27 @@ namespace SpiceSharp.Behaviors.CAP
         }
 
         /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="cap">Capacitance</param>
-        public TransientBehavior(double cap)
-        {
-            CAPcapac.Set(cap);
-        }
-
-        /// <summary>
         /// Setup the behavior
         /// </summary>
         /// <param name="component"></param>
         /// <param name="ckt"></param>
         public override void Setup(Entity component, Circuit ckt)
         {
+            cap = component as Capacitor;
+
             // If the capacitance is not given, try getting it from the temperature behavior
-            if (!CAPcapac.Given)
+            if (!cap.CAPcapac.Given)
             {
                 var temp = component.GetBehavior(typeof(Behaviors.TemperatureBehavior)) as TemperatureBehavior;
                 if (temp != null)
-                    CAPcapac.Value = temp.CAPcapac;
+                    cap.CAPcapac.Value = temp.CAPcapac;
             }
 
             // Allocate states
             CAPstate = ckt.State.GetState(2);
 
             // Get nodes
-            var cap = component as Capacitor;
+            
             CAPposNode = cap.CAPposNode;
             CAPnegNode = cap.CAPnegNode;
 
@@ -112,17 +100,17 @@ namespace SpiceSharp.Behaviors.CAP
             bool cond1 = (state.UseDC && state.Init == State.InitFlags.InitJct) || state.UseIC;
 
             if (cond1)
-                vcap = CAPinitCond;
+                vcap = cap.CAPinitCond;
             else
                 vcap = rstate.Solution[CAPposNode] - rstate.Solution[CAPnegNode];
 
             // Fill the matrix
-            state.States[0][CAPstate + CAPqcap] = CAPcapac * vcap;
+            state.States[0][CAPstate + CAPqcap] = cap.CAPcapac * vcap;
             if (state.Init == State.InitFlags.InitTransient)
                 state.States[1][CAPstate + CAPqcap] = state.States[0][CAPstate + CAPqcap];
 
             // Integrate
-            var result = ckt.Method.Integrate(state, CAPstate + CAPqcap, CAPcapac);
+            var result = ckt.Method.Integrate(state, CAPstate + CAPqcap, cap.CAPcapac);
             if (state.Init == State.InitFlags.InitTransient)
                 state.States[1][CAPstate + CAPqcap] = state.States[0][CAPstate + CAPqcap];
 

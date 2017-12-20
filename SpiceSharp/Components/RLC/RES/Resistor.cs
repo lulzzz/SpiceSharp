@@ -1,5 +1,6 @@
 ﻿using SpiceSharp.Circuits;
 using SpiceSharp.Behaviors.RES;
+using SpiceSharp.Parameters;
 
 namespace SpiceSharp.Components
 {
@@ -10,10 +11,28 @@ namespace SpiceSharp.Components
     public class Resistor : Component
     {
         /// <summary>
+        /// Parameters
+        /// </summary>
+        [SpiceName("resistance"), SpiceInfo("Resistance", IsPrincipal = true)]
+        public Parameter RESresist { get; } = new Parameter();
+        [SpiceName("w"), SpiceInfo("Width", Interesting = false)]
+        public Parameter RESwidth { get; } = new Parameter();
+        [SpiceName("l"), SpiceInfo("Length", Interesting = false)]
+        public Parameter RESlength { get; } = new Parameter();
+
+        /// <summary>
         /// Set the model for the resistor
         /// </summary>
         /// <param name="model"></param>
-        public void SetModel(ResistorModel model) => Model = model;
+        public void SetModel(ResistorModel model)
+        {
+            this.Model = model;
+
+            if (!this.RESwidth.Given)
+            {
+                this.RESwidth.Value = model.RESdefWidth ?? 0.0;
+            }
+        }
 
         /// <summary>
         /// Nodes
@@ -50,7 +69,7 @@ namespace SpiceSharp.Components
             : base(name, RESpinCount)
         {
             // Register behaviors
-            RegisterBehavior(new LoadBehavior(res));
+            RegisterBehavior(new LoadBehavior());
             RegisterBehavior(new AcBehavior());
             RegisterBehavior(new NoiseBehavior());
             RegisterBehavior(new TemperatureBehavior());

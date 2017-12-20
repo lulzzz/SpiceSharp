@@ -11,10 +11,28 @@ namespace SpiceSharp.Components
     public class Capacitor : Component
     {
         /// <summary>
+        /// Parameters
+        /// </summary>
+        [SpiceName("capacitance"), SpiceInfo("Device capacitance", IsPrincipal = true)]
+        public Parameter CAPcapac { get; } = new Parameter();
+        [SpiceName("ic"), SpiceInfo("Initial capacitor voltage", Interesting = false)]
+        public Parameter CAPinitCond { get; } = new Parameter();
+        [SpiceName("w"), SpiceInfo("Device width", Interesting = false)]
+        public Parameter CAPwidth { get; } = new Parameter();
+        [SpiceName("l"), SpiceInfo("Device length", Interesting = false)]
+        public Parameter CAPlength { get; } = new Parameter();
+
+
+        /// <summary>
         /// Set the model for the capacitor
         /// </summary>
         /// <param name="model"></param>
-        public void SetModel(CapacitorModel model) => Model = model;
+        public void SetModel(CapacitorModel model)
+        {
+            this.Model = model;
+            if (!CAPwidth.Given)
+                CAPwidth.Value = model.CAPdefWidth;
+        }
 
         /// <summary>
         /// Nodes
@@ -53,7 +71,7 @@ namespace SpiceSharp.Components
             : base(name, CAPpinCount)
         {
             // Register behaviors
-            RegisterBehavior(new TransientBehavior(cap));
+            RegisterBehavior(new TransientBehavior());
             RegisterBehavior(new AcBehavior());
             RegisterBehavior(new TemperatureBehavior());
             RegisterBehavior(new AcceptBehavior());

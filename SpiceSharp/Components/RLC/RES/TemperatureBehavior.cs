@@ -11,11 +11,6 @@ namespace SpiceSharp.Behaviors.RES
     public class TemperatureBehavior : Behaviors.TemperatureBehavior
     {
         /// <summary>
-        /// Necessary behaviors
-        /// </summary>
-        private ModelTemperatureBehavior modeltemp;
-
-        /// <summary>
         /// Parameters
         /// </summary>
         [SpiceName("temp"), SpiceInfo("Instance operating temperature", Interesting = false)]
@@ -24,11 +19,7 @@ namespace SpiceSharp.Behaviors.RES
             get => REStemp - Circuit.CONSTCtoK;
             set => REStemp.Set(value + Circuit.CONSTCtoK);
         }
-        public Parameter REStemp { get; } = new Parameter(300.15);
-        [SpiceName("w"), SpiceInfo("Width", Interesting = false)]
-        public Parameter RESwidth { get; } = new Parameter();
-        [SpiceName("l"), SpiceInfo("Length", Interesting = false)]
-        public Parameter RESlength { get; } = new Parameter();
+        public Parameter REStemp { get; } = new Parameter(300.15); // 27 C
 
         /// <summary>
         /// Get the default conductance for this model
@@ -40,6 +31,8 @@ namespace SpiceSharp.Behaviors.RES
         /// Name of the component
         /// </summary>
         private Identifier name;
+        private Resistor res;
+        private ResistorModel model;
 
         /// <summary>
         /// Setup the behavior
@@ -49,13 +42,8 @@ namespace SpiceSharp.Behaviors.RES
         /// <returns></returns>
         public override void Setup(Entity component, Circuit ckt)
         {
-            var res = component as Resistor;
-            if (res.Model == null)
-            {
-                modeltemp = null;
-                return;
-            }
-            modeltemp = GetBehavior<ModelTemperatureBehavior>(res.Model);
+            res = component as Resistor;
+            model = res.Model as ResistorModel;
             name = res.Name;
         }
 
@@ -71,23 +59,23 @@ namespace SpiceSharp.Behaviors.RES
             // Default Value Processing for Resistor Instance
             if (!REStemp.Given)
                 REStemp.Value = ckt.State.Temperature;
-            if (!RESwidth.Given)
-                RESwidth.Value = modeltemp?.RESdefWidth ?? 0.0;
+          
+            if (model == null)
+                throw new CircuitException("No model specified");
 
-            if (modeltemp == null)
-                throw new CircuitException("No modeltemp specified");
-            if (modeltemp.RESsheetRes.Given && (modeltemp.RESsheetRes != 0) && (RESlength != 0))
-                RESresist = modeltemp.RESsheetRes * (RESlength - modeltemp.RESnarrow) / (RESwidth - modeltemp.RESnarrow);
+            if ((model.RESsheetRes.Given && model.RESsheetRes != 0) && (res.RESlength != 0)) {
+                RESresist = model?.RESsheetRes * (res.RESlength - model.RESnarrow) / (res.RESwidth - ((ResistorModel)res.Model).RESnarrow);
+            }
             else
             {
                 CircuitWarning.Warning(this, $"{name}: resistance=0, set to 1000");
                 RESresist = 1000;
             }
 
-            if (modeltemp != null)
+            if (model != null)
             {
-                difference = REStemp - modeltemp.REStnom;
-                factor = 1.0 + (modeltemp.REStempCoeff1) * difference + (modeltemp.REStempCoeff2) * difference * difference;
+                difference = REStemp - model.REStnom;
+                factor = 1.0 + (model?.REStempCoeff1) * difference + (model?.REStempCoeff2) * difference * difference;
             }
             else
             {

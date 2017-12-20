@@ -80,7 +80,6 @@ namespace SpiceSharp.Behaviors.RES
         /// <summary>
         /// Unsetup
         /// </summary>
-        /// <param name="ckt">The circuit</param>
         public override void Unsetup()
         {
             // Remove references
