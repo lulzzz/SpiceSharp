@@ -1,8 +1,8 @@
 ﻿using SpiceSharp.Circuits;
 using SpiceSharp.Diagnostics;
-using SpiceSharp.Parameters;
 using SpiceSharp.Components.Transistors;
 using SpiceSharp.Components.ComponentBehaviors;
+using SpiceSharp.Attributes;
 
 namespace SpiceSharp.Components
 {

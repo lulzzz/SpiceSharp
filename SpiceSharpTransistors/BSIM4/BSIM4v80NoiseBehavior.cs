@@ -74,7 +74,7 @@ namespace SpiceSharp.Components.ComponentBehaviors
             base.Setup(component, ckt);
             bsim4 = (BSIM4v80)component;
 
-            BSIM4noise.Setup(ckt,
+            BSIM4noise.Setup(
                 bsim4.BSIM4dNode,
                 bsim4.BSIM4gNodeExt,
                 bsim4.BSIM4sNode,

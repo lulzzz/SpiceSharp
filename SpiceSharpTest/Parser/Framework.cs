@@ -3,12 +3,12 @@ using System.Text;
 using System.IO;
 using SpiceSharp;
 using SpiceSharp.Circuits;
-using SpiceSharp.Parameters;
 using SpiceSharp.Components;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SpiceSharp.Diagnostics;
 using SpiceSharp.Parser.Readers;
 using System.Collections.Generic;
+using SpiceSharp.Attributes;
 
 namespace SpiceSharpTest.Parser
 {

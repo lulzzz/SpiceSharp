@@ -1,5 +1,4 @@
 ﻿using SpiceSharp.Circuits;
-using SpiceSharp.Parameters;
 
 namespace SpiceSharp.Parser.Readers
 {

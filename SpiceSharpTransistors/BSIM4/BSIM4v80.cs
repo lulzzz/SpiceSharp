@@ -1,9 +1,9 @@
 ﻿using SpiceSharp.Circuits;
 using SpiceSharp.Diagnostics;
-using SpiceSharp.Parameters;
 using SpiceSharp.Components.Transistors;
 using static SpiceSharp.Components.Transistors.BSIM4v80Helpers;
 using SpiceSharp.Components.ComponentBehaviors;
+using SpiceSharp.Attributes;
 
 namespace SpiceSharp.Components
 {

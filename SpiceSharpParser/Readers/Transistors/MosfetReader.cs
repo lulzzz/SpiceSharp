@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using SpiceSharp.Components;
 using SpiceSharp.Circuits;
-using SpiceSharp.Parameters;
 
 namespace SpiceSharp.Parser.Readers
 {

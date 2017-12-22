@@ -38,7 +38,7 @@ namespace SpiceSharp.Components.ComponentBehaviors
         {
             base.Setup(component, ckt);
             bsim3 = (BSIM3v24)component;
-            BSIM3noise.Setup(ckt,
+            BSIM3noise.Setup(
                 bsim3.BSIM3dNode,
                 bsim3.BSIM3gNode,
                 bsim3.BSIM3sNode,

@@ -54,6 +54,14 @@
     <Compile Include="Components\Currentsources\VCCS\VoltageControlledCurrentsource.cs" />
     <Compile Include="Components\Currentsources\VCCS\AcBehavior.cs" />
     <Compile Include="Components\Currentsources\VCCS\LoadBehavior.cs" />
+    <Compile Include="Components\IConnectedBehavior.cs" />
+    <Compile Include="Components\IModelBehavior.cs" />
+    <Compile Include="Components\RLC\RES\BaseParameters.cs" />
+    <Compile Include="Components\RLC\RES\ModelBaseParameters.cs" />
+    <Compile Include="Components\Voltagesources\VSRC\AcParameters.cs" />
+    <Compile Include="Components\Voltagesources\VSRC\BaseParameters.cs" />
+    <Compile Include="Parameters.cs" />
+    <Compile Include="ParametersCollection.cs" />
     <Compile Include="Components\RLC\CAP\AcBehavior.cs" />
     <Compile Include="Components\RLC\CAP\AcceptBehavior.cs" />
     <Compile Include="Components\RLC\CAP\TemperatureBehavior.cs" />
@@ -120,6 +128,8 @@
     <Compile Include="PropertyParameter.cs" />
     <Compile Include="Parameter.cs" />
     <Compile Include="Simulations\BaseSimulation.cs" />
+    <Compile Include="Simulations\Behaviors\BehaviorPool.cs" />
+    <Compile Include="Simulations\Behaviors\EntityBehaviors.cs" />
     <Compile Include="Simulations\Behaviors\TemperatureBehavior.cs" />
     <Compile Include="Simulations\FrequencySimulation.cs" />
     <Compile Include="Simulations\Behaviors\IcBehavior.cs" />

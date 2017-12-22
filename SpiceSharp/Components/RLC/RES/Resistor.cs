@@ -1,6 +1,7 @@
 ﻿using SpiceSharp.Circuits;
+using SpiceSharp.Components.RES;
 using SpiceSharp.Behaviors.RES;
-using SpiceSharp.Parameters;
+using SpiceSharp.Attributes;
 
 namespace SpiceSharp.Components
 {
@@ -27,11 +28,6 @@ namespace SpiceSharp.Components
         public void SetModel(ResistorModel model)
         {
             this.Model = model;
-
-            if (!this.RESwidth.Given)
-            {
-                this.RESwidth.Value = model.RESdefWidth ?? 0.0;
-            }
         }
 
         /// <summary>
@@ -52,10 +48,14 @@ namespace SpiceSharp.Components
         public Resistor(Identifier name) 
             : base(name, RESpinCount)
         {
-            RegisterBehavior(new LoadBehavior());
-            RegisterBehavior(new AcBehavior());
-            RegisterBehavior(new NoiseBehavior());
-            RegisterBehavior(new TemperatureBehavior());
+            // Register parameters
+            Parameters.Register(new BaseParameters());
+
+            // Register factories
+            AddFactory(typeof(LoadBehavior), () => new LoadBehavior());
+            AddFactory(typeof(AcBehavior), () => new AcBehavior());
+            AddFactory(typeof(NoiseBehavior), () => new NoiseBehavior());
+            AddFactory(typeof(TemperatureBehavior), () => new TemperatureBehavior());
         }
 
         /// <summary>
@@ -68,26 +68,17 @@ namespace SpiceSharp.Components
         public Resistor(Identifier name, Identifier pos, Identifier neg, double res) 
             : base(name, RESpinCount)
         {
-            // Register behaviors
-            RegisterBehavior(new LoadBehavior());
-            RegisterBehavior(new AcBehavior());
-            RegisterBehavior(new NoiseBehavior());
-            RegisterBehavior(new TemperatureBehavior());
+            // Register parameters
+            Parameters.Register(new BaseParameters(res));
+
+            // Register factories
+            AddFactory(typeof(LoadBehavior), () => new LoadBehavior());
+            AddFactory(typeof(AcBehavior), () => new AcBehavior());
+            AddFactory(typeof(NoiseBehavior), () => new NoiseBehavior());
+            AddFactory(typeof(TemperatureBehavior), () => new TemperatureBehavior());
 
             // Connect
             Connect(pos, neg);
-        }
-
-        protected override void CollectNamedParameters()
-        {
-            base.CollectNamedParameters();
-            if (Model != null)
-            {
-                foreach (var behavior in Model.Behaviors.Values)
-                {
-                    base.CollectNamedParameters(behavior);
-                }
-            }
         }
 
         /// <summary>

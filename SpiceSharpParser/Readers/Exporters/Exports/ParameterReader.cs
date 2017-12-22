@@ -1,6 +1,5 @@
 ﻿using SpiceSharp.Circuits;
 using SpiceSharp.Simulations;
-using SpiceSharp.Parameters;
 
 namespace SpiceSharp.Parser.Readers.Exports
 {

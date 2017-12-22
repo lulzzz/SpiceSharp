@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using SpiceSharp.Components;
 using SpiceSharp.Circuits;
-using SpiceSharp.Parameters;
 using SpiceSharp.Parser.Subcircuits;
 using static SpiceSharp.Parser.SpiceSharpParserConstants;
 using System.Linq;
+using SpiceSharp.Attributes;
 
 namespace SpiceSharp.Parser.Readers
 {

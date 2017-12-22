@@ -1,6 +1,6 @@
 ﻿using SpiceSharp.Circuits;
 using SpiceSharp.Behaviors.CAP;
-using SpiceSharp.Parameters;
+using SpiceSharp.Attributes;
 
 namespace SpiceSharp.Components
 {
